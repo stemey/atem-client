@@ -1,0 +1,14 @@
+ {
+	//id : "default",
+	type : "Address",
+	//validTypes : [ "Address" ],
+	attributes : [ {
+		type : "text",
+		code : "firstname",
+		label : "Vorname"
+	}, {
+		type : "text",
+		code : "lastname",
+		label : "Nachname"
+	} ]
+}

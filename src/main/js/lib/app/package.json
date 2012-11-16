@@ -1,0 +1,6 @@
+{
+    "name": "app",
+    "description": "My application.",
+    "version": 1.0,
+    "dojoBuild": "app.profile.js"
+}
