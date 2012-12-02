@@ -5,6 +5,44 @@
 
 	<display-name>Adminclient</display-name>
 
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:http.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>MetaServlet</servlet-name>
+		<servlet-class>org.atemsource.atem.service.meta.service.http.MetaServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MetaServlet</servlet-name>
+		<url-pattern>/meta/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EntityServlet</servlet-name>
+		<servlet-class>org.atemsource.atem.service.entity.EntityServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EntityServlet</servlet-name>
+		<url-pattern>/entity/*</url-pattern>
+	</servlet-mapping>
+	
+    <servlet>
+        <servlet-name>cometd</servlet-name>
+        <servlet-class>org.cometd.server.CometdServlet</servlet-class>
+        <async-supported>true</async-supported>                                          (2)
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cometd</servlet-name>
+        <url-pattern>/cometd/*</url-pattern>
+    </servlet-mapping>
+
 
 	<error-page>
 		<error-code>404</error-code>
@@ -21,42 +59,20 @@
 	<servlet-mapping>
 		<servlet-name>index</servlet-name>
 		<url-pattern>/app/index.html</url-pattern>
-	</servlet-mapping>		
-	
-	<!-- 
+	</servlet-mapping>
 
-	<login-config>
-		<auth-method>FORM</auth-method>
-		<form-login-config>
-			<form-login-page>/app/login.html</form-login-page>
-			<form-error-page>/app/login_error.html</form-error-page>
-		</form-login-config>
-	</login-config>
-	
-	<security-constraint>
-		<display-name>Authorized</display-name>
-		<web-resource-collection>
-			<web-resource-name>Restricted Access</web-resource-name>
-			<url-pattern>/app/*</url-pattern>
-			<url-pattern>/service/*</url-pattern>
-			<url-pattern>/resources/*</url-pattern>
-			<url-pattern>/test/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>Editors</role-name>
-		</auth-constraint>
-		<user-data-constraint>
-			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
-		</user-data-constraint>
-	</security-constraint>
-	
-	<security-role>
-    	<role-name>Editors</role-name>
-	</security-role>
-	 -->
-	 
+	<!-- <login-config> <auth-method>FORM</auth-method> <form-login-config> 
+		<form-login-page>/app/login.html</form-login-page> <form-error-page>/app/login_error.html</form-error-page> 
+		</form-login-config> </login-config> <security-constraint> <display-name>Authorized</display-name> 
+		<web-resource-collection> <web-resource-name>Restricted Access</web-resource-name> 
+		<url-pattern>/app/*</url-pattern> <url-pattern>/service/*</url-pattern> <url-pattern>/resources/*</url-pattern> 
+		<url-pattern>/test/*</url-pattern> </web-resource-collection> <auth-constraint> 
+		<role-name>Editors</role-name> </auth-constraint> <user-data-constraint> 
+		<transport-guarantee>CONFIDENTIAL</transport-guarantee> </user-data-constraint> 
+		</security-constraint> <security-role> <role-name>Editors</role-name> </security-role> -->
+
 	<session-config>
 		<session-timeout>240</session-timeout>
 	</session-config>
-	
+
 </web-app>

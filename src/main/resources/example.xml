@@ -17,12 +17,37 @@
 
 
 
-	<import resource="classpath:/meta/utility/transform-complete.xml" />
+<!-- 	<import resource="classpath:/meta/utility/transform-complete.xml" /> -->
 	<import resource="classpath:/meta/utility/binding.xml" />
 	<import resource="classpath:/atem/pojo/entitytype.xml" />
 	<import resource="classpath:/atem/jackson/entitytype.xml" />
 
+<bean id="configuredBean" class="org.atemsource.atem.adminclient.example.ExampleBean">
+	<property name="number" value="123"/>
+	<property name="text" value="Hallo"/>
+	<property name="things">
+		<list>
+			<bean class="org.atemsource.atem.adminclient.example.ExampleThing">
+				<property name="yes" value="true"/>
+			</bean>
+			<bean class="org.atemsource.atem.adminclient.example.ExampleThing">
+				<property name="yes" value="false"/>
+			</bean>
+		</list>
+	</property>
+</bean>
 
+<bean id="configuredBean2" class="org.atemsource.atem.adminclient.example.ExampleBean">
+	<property name="number" value="444"/>
+	<property name="text" value="bye bye"/>
+	<property name="things">
+		<list>
+			<bean class="org.atemsource.atem.adminclient.example.ExampleThing">
+				<property name="yes" value="true"/>
+			</bean>
+		</list>
+	</property>
+</bean>
 
 	<context:component-scan base-package="org.atemsource.atem.adminclient.example">
 	</context:component-scan>
@@ -41,15 +66,15 @@
 	</bean>
 
 
-	<bean id="atem-utility-binder" class="org.atemsource.atem.utility.binding.Binder">
-		<property name="typeFilter" ref="example-repository" />
-		<property name="subRepository" ref="atem-json-repository" />
-		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
-		<property name="typeNameConverter">
-			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
-				<property name="prefix" value="json" />
-			</bean>
-		</property>
-	</bean>
+<!-- 	<bean id="atem-utility-binder" class="org.atemsource.atem.utility.binding.Binder"> -->
+<!-- 		<property name="typeFilter" ref="example-repository" /> -->
+<!-- 		<property name="subRepository" ref="atem-json-repository" /> -->
+<!-- 		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" /> -->
+<!-- 		<property name="typeNameConverter"> -->
+<!-- 			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter"> -->
+<!-- 				<property name="prefix" value="json" /> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 
 </beans>

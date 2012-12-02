@@ -1,19 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.atemsource</groupId>
 	<artifactId>admin-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-<!-- 	<scm> -->
-<!-- 		<connection>scm:git:ssh://github.net.railsteam.de/project/simyo/api-client.git</connection> -->
-<!-- 		<developerConnection>scm:git:ssh://github.net.railsteam.de/project/simyo/api-client.git</developerConnection> -->
-<!-- 	</scm> -->
+	<!-- <scm> -->
+	<!-- <connection>scm:git:ssh://github.net.railsteam.de/project/simyo/api-client.git</connection> -->
+	<!-- <developerConnection>scm:git:ssh://github.net.railsteam.de/project/simyo/api-client.git</developerConnection> -->
+	<!-- </scm> -->
 	<dependencies>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>taglibs</groupId> -->
+		<!-- <artifactId>standard</artifactId> -->
+		<!-- <version>1.1.2</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
@@ -30,6 +31,17 @@
 			<groupId>org.atemsource</groupId>
 			<artifactId>atem-rest</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cometd.java</groupId>
+			<artifactId>cometd-java</artifactId>
+			<version>2.5.1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.cometd.java</groupId>
+			<artifactId>cometd-java-server</artifactId>
+			<version>2.5.1</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -52,30 +64,30 @@
 					<target />
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>de.s2.sim.simyo</groupId>
-				<artifactId>maven-dojo-build-plugin</artifactId>
-				<version>1.0.7</version>
-				<executions>
-					<execution>
-						<id>dojo</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-						<configuration>
-							<dojoDir>${basedir}/src/main/js/lib/dojo-release-1.8/</dojoDir>
-							<releaseDir>../../../../../../../target/admin-client/</releaseDir>
-							<debugFrom>${basedir}/src/main/js/lib/app</debugFrom>
-							<debugTo>${basedir}/target/admin-client/dojo/app/</debugTo>
-							<tempDir>../../../../../../../target/dojo/</tempDir>
-							<profile>../../../../../build/admin-client</profile>
-							<options>optimize=shrinksafe.keepLines
-								cssOptimize=comments.keepLines</options>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> -->
+			<!-- <groupId>de.s2.sim.simyo</groupId> -->
+			<!-- <artifactId>maven-dojo-build-plugin</artifactId> -->
+			<!-- <version>1.0.7</version> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>dojo</id> -->
+			<!-- <phase>process-resources</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>build</goal> -->
+			<!-- </goals> -->
+			<!-- <configuration> -->
+			<!-- <dojoDir>${basedir}/src/main/js/lib/dojo-release-1.8/</dojoDir> -->
+			<!-- <releaseDir>../../../../../../../target/admin-client/</releaseDir> -->
+			<!-- <debugFrom>${basedir}/src/main/js/lib/app</debugFrom> -->
+			<!-- <debugTo>${basedir}/target/admin-client/dojo/app/</debugTo> -->
+			<!-- <tempDir>../../../../../../../target/dojo/</tempDir> -->
+			<!-- <profile>../../../../../build/admin-client</profile> -->
+			<!-- <options>optimize=shrinksafe.keepLines -->
+			<!-- cssOptimize=comments.keepLines</options> -->
+			<!-- </configuration> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -85,6 +97,11 @@
 					<downloadJavadocs>true</downloadJavadocs>
 					<wtpversion>2.0</wtpversion>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.0</version>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -124,26 +141,26 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
-    <pluginRepositories>
+
+	<pluginRepositories>
 		<pluginRepository>
 			<id>maven2-repository.dev.java.net</id>
 			<name>Java.net Maven 2 Repository</name>
 			<url>http://download.java.net/maven/2</url>
 		</pluginRepository>
-		<pluginRepository>
-			<id>sinnerschrader-repository</id>
-			<name>SinnerSchrader-Maven-Repository</name>
-			<url>http://maven.sinner-schrader.de</url>
-		</pluginRepository>
+		<!-- <pluginRepository> -->
+		<!-- <id>sinnerschrader-repository</id> -->
+		<!-- <name>SinnerSchrader-Maven-Repository</name> -->
+		<!-- <url>http://maven.sinner-schrader.de</url> -->
+		<!-- </pluginRepository> -->
 	</pluginRepositories>
-    
-<!--     <distributionManagement> -->
-<!--         <repository> -->
-<!--             <id>simyo-repo</id> -->
-<!--             <name>simyo Repository auf sim-pub</name> -->
-<!--             <url>scpexe://sim-pub/var/local/deploymentbase/maven2</url> -->
-<!--         </repository> -->
-<!--     </distributionManagement> -->
-	
+
+	<!-- <distributionManagement> -->
+	<!-- <repository> -->
+	<!-- <id>simyo-repo</id> -->
+	<!-- <name>simyo Repository auf sim-pub</name> -->
+	<!-- <url>scpexe://sim-pub/var/local/deploymentbase/maven2</url> -->
+	<!-- </repository> -->
+	<!-- </distributionManagement> -->
+
 </project>
