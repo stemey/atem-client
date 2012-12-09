@@ -43,6 +43,11 @@
 			<artifactId>cometd-java-server</artifactId>
 			<version>2.5.1</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<extensions>
@@ -64,30 +69,30 @@
 					<target />
 				</configuration>
 			</plugin>
-			<!-- <plugin> -->
-			<!-- <groupId>de.s2.sim.simyo</groupId> -->
-			<!-- <artifactId>maven-dojo-build-plugin</artifactId> -->
-			<!-- <version>1.0.7</version> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <id>dojo</id> -->
-			<!-- <phase>process-resources</phase> -->
-			<!-- <goals> -->
-			<!-- <goal>build</goal> -->
-			<!-- </goals> -->
-			<!-- <configuration> -->
-			<!-- <dojoDir>${basedir}/src/main/js/lib/dojo-release-1.8/</dojoDir> -->
-			<!-- <releaseDir>../../../../../../../target/admin-client/</releaseDir> -->
-			<!-- <debugFrom>${basedir}/src/main/js/lib/app</debugFrom> -->
-			<!-- <debugTo>${basedir}/target/admin-client/dojo/app/</debugTo> -->
-			<!-- <tempDir>../../../../../../../target/dojo/</tempDir> -->
-			<!-- <profile>../../../../../build/admin-client</profile> -->
-			<!-- <options>optimize=shrinksafe.keepLines -->
-			<!-- cssOptimize=comments.keepLines</options> -->
-			<!-- </configuration> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
+			<plugin>
+				<groupId>org.atemsource.dojo</groupId>
+				<artifactId>maven-dojo-build-plugin</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<id>dojo</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+						<configuration>
+							<workDir>${basedir}/src/main/js/lib/dojo-release-1.8/util/buildscripts/</workDir>
+							<releaseDir>../../../../../../../target/restclient/</releaseDir>
+							<debugFrom>${basedir}/src/main/js/lib/app</debugFrom>
+							<debugTo>${basedir}/target/restclient/dojo/app/</debugTo>
+							<tempDir>../../../../../../../target/dojo/</tempDir>
+							<profile>../../../../../build/restclient</profile>
+							<options>optimize=shrinksafe.keepLines
+								cssOptimize=comments.keepLines</options>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>

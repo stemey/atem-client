@@ -12,14 +12,15 @@ define([ "dojo/_base/array", //
 "./IntegerAttributeFactory",//
 "./SelectArrayAttributeFactory",//
 "./CurrencyAmountAttributeFactory",//
-"./AttributeListWidget"
+"./AttributeListWidget",//
+"./list_embedded/RepeatedEmbeddedAttributeFactory"
 
 ], function(array, lang, declare, at, DecoratorWidget, TextAttributeFactory,
 		BooleanAttributeFactory, SelectAttributeFactory,
 		AccessTokenAttributeFactory, UserNameAttributeFactory,
 		MappedSelectAttributeFactory, IntegerAttributeFactory,
 		SelectArrayAttributeFactory, CurrencyAmountAttributeFactory,
-		AttributeListWidget) {
+		AttributeListWidget,RepeatedEmbeddedAttributeFactory) {
 
 	return declare("app.Groupfactory", null, {
 		constructor : function(kwArgs) {
@@ -39,6 +40,7 @@ define([ "dojo/_base/array", //
 		},
 
 		attributeFactories : [ //
+		new RepeatedEmbeddedAttributeFactory(),//
 		new SelectArrayAttributeFactory(),//
 		new IntegerAttributeFactory(),//
 		new CurrencyAmountAttributeFactory(),//

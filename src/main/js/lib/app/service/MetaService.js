@@ -5,11 +5,11 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array" ],
 				convertError : function(errorResponse) {
 					return JSON.parse(errorResponse.responseText).status;
 				},
-				getMeta : function(callback) {
+				loadMeta : function(callback) {
 
 					var me = this;
 					var xhrArgs = {
-						url : "../../api/meta/",
+						url : "../../meta/",
 						handleAs : "json",
 						load : function(data) {
 							me.onLoaded(data);
@@ -24,24 +24,12 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array" ],
 					var deferred = dojo.xhrGet(xhrArgs);
 				},
 				onLoaded : function(data) {
-					this.meta = data.entity;
+					this.meta = data;
 				},
-				getVersions : function() {
-					var versions = [];
-					for ( var key in this.meta) {
-						versions.push({
-							id : key,
-							name : key
-						});
-					}
-					versions.sort(function(a, b) {
-						return a.name > b.name ? 1:-1;
-					})
-					return versions;
-				},
-				getServices : function(version) {
+
+				getServices : function() {
 					var services = [];
-					var methods = this.meta[version].methods;
+					var methods = this.meta.services;
 					for ( var key in methods) {
 						services.push({
 							id : key,
@@ -54,8 +42,8 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array" ],
 					return services;
 
 				},
-				getEditor : function(version, service) {
-					return this.meta[version].methods[service];
+				getMeta : function(service) {
+					return this.meta.services[service];
 				}
 
 			});

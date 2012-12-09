@@ -1,5 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,11 +43,11 @@
 	window.restClientConfig = {
 		basePath : basePath[1]
 	};
-	require([ "dojo/domReady!", "app/ApplicationController" ], function(ready,
-			applicationController) {
+	require([ "dojo/domReady!", "app/ServiceController" ], function(ready,
+			serviceController) {
 
-		window.applicationController = applicationController;
-		applicationController.start();
+		window.serviceController = serviceController;
+		serviceController.start();
 	});
 </script>
 
@@ -69,27 +67,14 @@
 			</div>
 			<div id="center" dojoType="dijit.layout.ContentPane" region="center">
 				<div data-dojo-type="dojox.mvc.Group" class="editor"
-					data-dojo-props="target: at(applicationController, 'model')">
-					<div class="row">
-						<label for="version">Version:</label> <input
-							id="version" data-dojo-type="dijit.form.ComboBox"
-							data-dojo-props=' value: at("rel:", "selectedVersion")' />
-					</div>
+					data-dojo-props="target: at(serviceController, 'model')">
 					<div class="row">
 						<label for="service">Service:</label> <input
 							id="service" data-dojo-type="dijit.form.FilteringSelect"
 							data-dojo-props=' value: at("rel:", "selectedService")' />
 					</div>
-					<div>
-						<div id="variables"></div>
-						<div id="params"></div>
-						<div id="requestBody"></div>
-					</div>
-					<button data-dojo-type="dijit/form/Button" id="submit">Abschicken</button>
-					<textarea data-dojo-type="dijit/form/Textarea" style="width: 50%;"
-						id="displayArea" ></textarea>
+					<div id="form"></div>
 				</div>
-				<div id="form"></div>
 
 			</div>
 		</div>

@@ -25,7 +25,7 @@ define([ "dojo/_base/array", //
 	return declare("app.EmbeddedGroupFactory", GroupFactory,
 			{
 				handles : function(attribute, modelHandle) {
-					return attribute != null && attribute.type.attributes;
+					return attribute != null && attribute.type.attributes && !attribute.array;
 				},
 				create : function(attribute, modelHandle) {
 
