@@ -9,7 +9,7 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array" ],
 
 					var me = this;
 					var xhrArgs = {
-						url : "/client/json/meta.json",
+						url : "/json/meta.json",
 						handleAs : "json",
 						load : function(data) {
 							me.onLoaded(data);

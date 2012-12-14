@@ -1,0 +1,38 @@
+{
+services:
+	{
+	"test":{
+		name:"example",
+		resourceType:{
+			group:{
+				type:"tab",
+				tabs: [
+					{
+					label:"tab1",
+					attributes:[
+						{
+						code:"test",
+						label:"test",
+						type: {code:"text"}
+						}
+						]
+					}
+					]
+				}
+			},
+		uriPath:"/example.json"
+		}
+	},
+	"test3":{name:"example2",
+	resourceType:{
+		attributes:[
+			{
+			code:"test",
+			label:"xxx"
+			type: {code:"text"}
+			}
+			]},
+	uriPath:"/example.json"
+	}
+	}
+}

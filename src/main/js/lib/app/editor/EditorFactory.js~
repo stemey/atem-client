@@ -20,7 +20,7 @@ define([ "dojo/_base/array", //
 			if (group.groupType) {
 				return this.find(group.groupType)
 						.create(editor, modelHandle);
-			} else if (lang.isArray(group.attributes)) {
+			} else if (lang.isArray(editor.attributes)) {
 				return this.groupFactories["list"].create({
 					type : {
 						attributes : group.attributes
