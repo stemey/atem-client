@@ -2,19 +2,21 @@ define([ "dojo/_base/array", //
 "dojo/_base/lang",//
 "dojo/_base/declare",//
 "dojox/mvc/at",//
-"./GroupPanelWidget",//
+"./embedded/GroupPanelWidget",//
 "./SingleTypePanelWidget",//
+"./AttributeListWidget",//
 "dijit/layout/StackContainer",//
 "dojo/Stateful",//
 "dijit/TitlePane"//
 
-], function(array, lang, declare, at, GroupPanelWidget, SingleTypePanelWidget,
+], function(array, lang, declare, at, GroupPanelWidget, SingleTypePanelWidget,AttributeListWidget,
 		StackContainer, GroupFactory, Stateful, TitlePane) {
 
 	return declare("app.EmbeddedGroupFactory", GroupFactory, {
 		handles : function(attribute, modelHandle) {
 			// check if the attribute is complex.
-			return attribute != null && attribute.type.attributes
+			return attribute != null
+					&& (attribute.type.attributes || attribute.validTypes)
 					&& !attribute.array;
 		},
 		create : function(attribute, modelHandle) {
@@ -61,7 +63,7 @@ define([ "dojo/_base/array", //
 				var typeStack = new StackContainer();
 				var typeToGroup = {};
 				array.forEach(attribute.validTypes, function(type) {
-					var editor = new Editor();
+					var editor = new app.Editor();
 					editor.set("meta", type);
 					editor.set("modelHandle", model);
 					typeStack.addChild(editor);

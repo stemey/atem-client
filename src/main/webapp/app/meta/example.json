@@ -1,4 +1,4 @@
-	{
+ {
 	"services" : {
 		"entity/example.json" : {
 			"name" : "entity/example",
@@ -45,7 +45,7 @@
 						} ],
 						"type_property" : "ext_type"
 					}
-				}, {
+				},    {
 					"ext_type" : "editor:single-attribute",
 					"required" : false,
 					"type" : "text",
@@ -66,14 +66,41 @@
 				"label" : "example",
 				"attributes" : [ {
 					"required" : false,
-					"type" : "integer",
+					"type" : "text",
 					"label" : "number",
 					"code" : "number",
+					"array" : false
+				}, {
+					"required" : false,
+					"type" : "thing1",
+					"validTypes" : [ {
+						"code" : "thing1",
+						"attributes" : [ {
+							"required" : false,
+							"type" : "text",
+							"label" : "name",
+							"code" : "name",
+							"array" : false
+						} ]
+
+					}, {
+						"code" : "thing2",
+						"attributes" : [ {
+							"required" : false,
+							"type" : "text",
+							"label" : "firstName",
+							"code" : "firstName",
+							"array" : false
+						} ]
+
+					} ],
+					"label" : "thing",
+					"code" : "thing",
 					"array" : false
 				} ],
 				"type_property" : "ext_type"
 			},
-			"uriPath" : "entity/thin.json",
+			"uriPath" : "entity/thing.json",
 			"singleOperations" : [ "READ" ]
 		}
 	}
