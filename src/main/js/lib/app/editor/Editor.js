@@ -1,8 +1,8 @@
 define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
-		"dojox/mvc/_Container", "dojox/mvc/at", "./TextAttributeFactory",
+		"dojox/mvc/_Container", "dojox/mvc/at", 
 		"dojo/dom-construct", "./EditorFactory", "dojo/Stateful",
 		"dojox/mvc/Group", "dijit/form/TextBox" ], function(array, lang,
-		declare, Container, at, TextAttributeFactory, domConstruct,
+		declare, Container, at, domConstruct,
 		EditorFactory, Stateful) {
 
 	// at needs to be globally defined.

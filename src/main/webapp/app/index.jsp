@@ -47,6 +47,7 @@
 			serviceController) {
 
 		window.serviceController = serviceController;
+		serviceController.set("metaUrl","../../meta/");
 		serviceController.start();
 	});
 </script>

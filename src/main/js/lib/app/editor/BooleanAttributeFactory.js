@@ -8,7 +8,7 @@ define([ "dojo/_base/array", //
 
 	return declare("app.BooleanAttributeFactory", [], {
 		handles : function(attribute) {
-			return attribute.type.code == "boolean";
+			return attribute.type.code == "boolean" || attribute.type == "boolean";
 		},
 		create : function(attribute, modelHandle) {
 			return new TextBox({

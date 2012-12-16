@@ -1,7 +1,7 @@
- {
-	//id : "default",
+x = {
+	// id : "default",
 	type : "Address",
-	//validTypes : [ "Address" ],
+	// validTypes : [ "Address" ],
 	attributes : [ {
 		type : "text",
 		code : "firstname",

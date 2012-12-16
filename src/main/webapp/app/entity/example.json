@@ -1,0 +1,12 @@
+{
+	number : 2,
+	text : "hallo",
+	athing: {
+		test:"moin"
+	},
+	things : [ {
+		yes : false
+	}, {
+		yes : true
+	} ]
+}

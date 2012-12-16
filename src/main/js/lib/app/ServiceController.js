@@ -11,6 +11,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
 	declare("app.ServiceController", [ Stateful ], {
 		editor : null,
 		meta : null,
+		metaUrl : null,
 		model : new Stateful({
 			selectedService : null,
 			params : null,
@@ -50,7 +51,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
 //			var requestBodyDiv = dojo.byId("requestBody");
 //			this.editorBody.placeAt(requestBodyDiv);
 
-			metaService.loadMeta(lang.hitch(this, "metaLoaded")); 
+			metaService.loadMeta(this.metaUrl,lang.hitch(this, "metaLoaded")); 
 			this.model.watch("selectedService", lang.hitch(this,
 					"onServiceSelected"));
 

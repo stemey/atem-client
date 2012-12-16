@@ -6,16 +6,20 @@ define([ "dojo/_base/array", //
 "./AttributeListWidget",//
 "./AttributeFactoryFinder"
 
-], function(array, lang, declare, at, DecoratorWidget,
-		AttributeListWidget,AttributeFactoryFinder) {
+], function(array, lang, declare, at, DecoratorWidget, AttributeListWidget,
+		AttributeFactoryFinder) {
 
 	return declare("app.Groupfactory", null, {
 		constructor : function(kwArgs) {
 
 		},
 		createAttribute : function(attribute, modelHandle) {
-			var factory = AttributeFactoryFinder.getFactory(attribute.editor);
-			return factory.create(attribute, modelHandle);
+			var factory = AttributeFactoryFinder.getFactory(attribute);
+			if (factory != null) {
+				return factory.create(attribute, modelHandle);
+			} else {
+				return null;
+			}
 		},
 		create : function(group, modelHandle) {
 			var listWidget = new AttributeListWidget();

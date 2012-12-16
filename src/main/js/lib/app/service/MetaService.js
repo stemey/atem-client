@@ -5,11 +5,11 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array" ],
 				convertError : function(errorResponse) {
 					return JSON.parse(errorResponse.responseText).status;
 				},
-				loadMeta : function(callback) {
+				loadMeta : function(url,callback) {
 
 					var me = this;
 					var xhrArgs = {
-						url : "/client/json/meta.json",
+						url : url,
 						handleAs : "json",
 						load : function(data) {
 							me.onLoaded(data);

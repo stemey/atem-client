@@ -8,7 +8,7 @@ define([ "dojo/_base/array", //
 
 	return declare("app.TextAttributeFactory", [], {
 		handles : function(attribute) {
-			return attribute.type.code == "text" && !attribute.array;
+			return attribute.type == "text" && !attribute.array;
 		},
 		create : function(attribute, modelHandle) {
 			return new TextBox({

@@ -6,6 +6,7 @@ define([ "dojo/_base/array", //
 "./SelectAttributeFactory",//
 "./AccessTokenAttributeFactory",//
 "./MappedSelectAttributeFactory",//
+"./EmbeddedAttributeFactory2",//
 "./IntegerAttributeFactory",//
 "./SelectArrayAttributeFactory",//
 "./AttributeListWidget",//
@@ -13,41 +14,46 @@ define([ "dojo/_base/array", //
 
 ], function(array, lang, declare, TextAttributeFactory,
 		BooleanAttributeFactory, SelectAttributeFactory,
-		AccessTokenAttributeFactory, 
-		MappedSelectAttributeFactory, IntegerAttributeFactory,
-		SelectArrayAttributeFactory, 
-		AttributeListWidget,RepeatedEmbeddedAttributeFactory) {
+		AccessTokenAttributeFactory, MappedSelectAttributeFactory,EmbeddedAttributeFactory,
+		IntegerAttributeFactory, SelectArrayAttributeFactory,
+		AttributeListWidget, RepeatedEmbeddedAttributeFactory) {
 
-	var AttributeFactoryFinder= declare("app.editor.AttributeFactoryFinder", null, {
-		constructor : function(kwArgs) {
+	var AttributeFactoryFinder = declare("app.editor.AttributeFactoryFinder",
+			null, {
+				constructor : function(kwArgs) {
 
-		},
-		
-		attributeFactories : [ //
-//		new RepeatedEmbeddedAttributeFactory(),//
-//		new SelectArrayAttributeFactory(),//
-//		new IntegerAttributeFactory(),//
-//		new SelectAttributeFactory(), // 
-//		new BooleanAttributeFactory(), // 
-		new TextAttributeFactory() //
-		],
-		addFactory : function(factory) {
-			this.attributeFactories.push(factory);
-		},
-		getFactory : function(attribute) {
-			var factory = this.attributeFactoryMap[attribute.editor];
-			// if (factory == null) {
-			// factory = this.attributeFactoryMap[attribute.type.code];
-			// }
-			if (factory == null) {
-				var factories = array.filter(this.attributeFactories, function(
-						af) {
-					return af.handles && af.handles(attribute);
-				});
-			}
-			return factory.create(attribute, modelHandle);
-		}
-	})
+				},
 
-	return new AttributeFactoryFinder(); 
+				attributeFactories : [ //
+				new RepeatedEmbeddedAttributeFactory(),//
+				new EmbeddedAttributeFactory(),//
+				new SelectArrayAttributeFactory(),//
+				new IntegerAttributeFactory(),//
+				new SelectAttributeFactory(), // 
+				new BooleanAttributeFactory(), // 
+				new TextAttributeFactory() //
+				],
+				attributeFactoryMap : {},
+				addFactory : function(factory) {
+					this.attributeFactories.push(factory);
+				},
+				getFactory : function(attribute) {
+					var factory = this.attributeFactoryMap[attribute.editor];
+					// if (factory == null) {
+					// factory = this.attributeFactoryMap[attribute.type.code];
+					// }
+					if (!factory) {
+						var factories = array.filter(this.attributeFactories,
+								function(af) {
+									return af.handles && af.handles(attribute);
+								});
+						if (factories.length > 0) {
+							factory = factories[0];
+						}
+					}
+					return factory;
+				}
+			})
+
+	return new AttributeFactoryFinder();
 });
