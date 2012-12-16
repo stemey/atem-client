@@ -53,7 +53,7 @@ define([ "dojo/_base/array", //
 						});
 						var initialType = validTypeOptions[0].value
 						var panelModel = new Stateful({
-							title : "",// attribute.code,
+							title : "",
 							validTypes : validTypeOptions,
 							type : initialType
 						});

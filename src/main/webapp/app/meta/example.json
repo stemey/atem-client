@@ -73,8 +73,10 @@
 				}, {
 					"required" : false,
 					"type" : "thing1",
+					"type_property":"ext_type",
 					"validTypes" : [ {
 						"code" : "thing1",
+						"label":"thing1",
 						"attributes" : [ {
 							"required" : false,
 							"type" : "text",
@@ -85,7 +87,8 @@
 
 					}, {
 						"code" : "thing2",
-						"attributes" : [ {
+						"label":"thing2",
+							"attributes" : [ {
 							"required" : false,
 							"type" : "text",
 							"label" : "firstName",
