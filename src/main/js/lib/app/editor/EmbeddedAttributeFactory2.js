@@ -105,10 +105,9 @@ define([ "dojo/_base/array", //
 //			}
 			
 			panelWidget = new GroupPanelWidget({
-
+				"modelHandle":modelHandle,
+				"meta":attribute
 			});
-			panelWidget.set("modelHandle",model);
-			panelWidget.set("meta",attribute);
 
 			return panelWidget;
 

@@ -3,7 +3,12 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
  "app/editor/Editor", "dojo/Stateful",
 		"app/service/MetaService", "app/service/RestService",
 		'dojo/data/ItemFileReadStore', 'app/lib/beautify',
-		'app/editor/getPlainValue','app/SingletonController',"dijit/registry" ], function(array, lang, declare, 
+
+		'app/editor/getPlainValue','app/SingletonController',"dijit/registry",//
+"dijit/form/FilteringSelect",//
+"dijit/layout/BorderContainer",//
+"dijit/layout/ContentPane",//
+"dojox/mvc/Group" ], function(array, lang, declare, 
 //dijitall,
 		Editor, Stateful, metaService, restService, ItemFileReadStore,
 		beautify, getPlainValue, SingletonController,registry) {
@@ -66,7 +71,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
 					items : selectableServices
 				}
 			});
-			dijit.registry.byId("service").set("store", store);
+			registry.byId("service").set("store", store);
 			// var currentServiceId = this.model.get("selectedService").id;
 			// var newService = array.filter(selectableServices, function(
 			// selectableService) {
