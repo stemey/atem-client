@@ -1,7 +1,7 @@
 {
-	text : "hallo",
-	athing: {
+	number : "hallo",
+	thing: {
 		ext_type:"thing1",
-		test:"moin"
+		name:"moin"
 	}
 }

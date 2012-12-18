@@ -10,9 +10,9 @@ define([ "dojo/_base/array", //
 "dijit/TitlePane"//
 
 ], function(array, lang, declare, at, GroupPanelWidget, SingleTypePanelWidget,AttributeListWidget,
-		StackContainer, GroupFactory, Stateful, TitlePane) {
+		StackContainer,  Stateful, TitlePane) {
 
-	return declare("app.EmbeddedGroupFactory", GroupFactory, {
+	return declare("app.EmbeddedGroupFactory", [],{
 		handles : function(attribute, modelHandle) {
 			// check if the attribute is complex.
 			return attribute != null
@@ -105,10 +105,10 @@ define([ "dojo/_base/array", //
 //			}
 			
 			panelWidget = new GroupPanelWidget({
-				meta : attribute,
-				modelHandle:model
 
 			});
+			panelWidget.set("modelHandle",model);
+			panelWidget.set("meta",attribute);
 
 			return panelWidget;
 

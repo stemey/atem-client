@@ -4,10 +4,11 @@ define([ "dojo/_base/array", //
 		"dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin",
 		"dojo/text!./polymorphic_embedded_attribute.html",
 		"dijit/layout/StackContainer", "dojo/Stateful",
-		"../AttributeListWidget"//
+		"../AttributeListWidget",//
+		"dojox/mvc/Bind"//
 ], function(array, lang, declare, _WidgetBase, _Container, _TemplatedMixin,
 		_WidgetsInTemplateMixin, template, StackContainer, Stateful,
-		AttributeListWidget) {
+		AttributeListWidget,Bind) {
 
 	return declare("app.GroupPanelWidget", [ _WidgetBase, _Container,
 			_TemplatedMixin, _WidgetsInTemplateMixin ], {
@@ -37,17 +38,18 @@ define([ "dojo/_base/array", //
 
 				var typeStack = new StackContainer();
 				var typeToGroup = {};
+				var me=this;
 				array.forEach(attribute.validTypes, function(type) {
 					var editor = new app.Editor();
+					editor.set("modelHandle", me.get("modelHandle"));
 					editor.set("meta", type);
-					editor.set("modelHandle", this.get("modelHandle"));
+					//Bind.bind(this,"modelHandle",editor,"modelHandle");
 					typeStack.addChild(editor);
 					typeToGroup[type.code] = editor;
 				}, this);
 				var nullWidget = new AttributeListWidget();
 				typeStack.addChild(nullWidget);
 				typeToGroup["null"] = nullWidget;
-				var me=this;
 				panelModel.watch("type", function() {
 					var type = panelModel.get("type");
 					var modelHandle=me.get("modelHandle");
