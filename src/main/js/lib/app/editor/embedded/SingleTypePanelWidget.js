@@ -4,11 +4,11 @@ define([ "dojo/_base/array", //
 		"dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin",
 		"dojo/text!./singletype_embedded_attribute.html",
 		"dijit/layout/StackContainer", "dojo/Stateful",
-		"../AttributeListWidget",//
+		
 		"dojox/mvc/Bind"//
 ], function(array, lang, declare, _WidgetBase, _Container, _TemplatedMixin,
 		_WidgetsInTemplateMixin, template, StackContainer, Stateful,
-		AttributeListWidget,Bind) {
+		Bind) {
 
 	return declare("app.GroupPanelWidget", [ _WidgetBase, _Container,
 			_TemplatedMixin, _WidgetsInTemplateMixin ], {

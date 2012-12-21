@@ -2,9 +2,8 @@ define([ "dojo/_base/array", //
 "dojo/_base/lang",//
 "dojo/_base/declare",//
 "dojox/mvc/at",//
-"./DecoratorWidget",//
 "dijit/form/CheckBox"//
-], function(array, lang, declare, at, DecoratorWidget, TextBox) {
+], function(array, lang, declare, at, TextBox) {
 
 	return declare("app.BooleanAttributeFactory", [], {
 		handles : function(attribute) {

@@ -3,15 +3,13 @@ define([ "dojo/_base/array", //
 "../Editor",//
 "dojo/_base/declare",//
 "dojox/mvc/at",//
-"../DecoratorWidget",//
-"dojo/store/Memory",//
 "dojox/mvc/StatefulArray",//
 "dojo/Stateful",//
 "./EmbeddedListWidget",//
 "dojox/mvc/sync",//
 "dojox/mvc/WidgetList",//
 "./RepeatedEmbeddedWidget",//
-], function(array, lang, Editor, declare, at, DecoratorWidget, Memory,
+], function(array, lang, Editor, declare, at, 
 		StatefulArray, Stateful,EmbeddedListWidget, sync, WidgetList,RepeatedEmbeddedWidget) {
 
 	return declare("app.RepeatedEmbeddedAttributeFactory", [], {

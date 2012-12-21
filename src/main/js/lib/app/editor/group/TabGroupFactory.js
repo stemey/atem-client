@@ -4,8 +4,8 @@ define([ "dojo/_base/array", //
 "dojo/_base/declare",//
 "dojox/mvc/at",//
 "dijit/layout/TabContainer",//
-"../DecoratorWidget",//
-"../AttributeListWidget",//
+"./DecoratorWidget",//
+"./AttributeListWidget",//
 "../AttributeFactoryFinder"
 
 ], function(array, lang, declare, at, TabContainer, DecoratorWidget,

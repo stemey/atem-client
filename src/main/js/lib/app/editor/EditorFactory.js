@@ -2,7 +2,7 @@ define([ "dojo/_base/array", //
 "dojo/_base/lang",//
 "dojo/_base/declare",//
 "dojox/mvc/at",//
-"./GroupFactory",//
+"./group/GroupFactory",//
 "./group/TabGroupFactory"//
 ], function(array, lang, declare, at, GroupFactory,TabGroupFactory) {
 

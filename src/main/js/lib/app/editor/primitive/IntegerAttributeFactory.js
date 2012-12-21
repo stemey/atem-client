@@ -3,11 +3,10 @@ define(
 		"dojo/_base/lang",//
 		"dojo/_base/declare",//
 		"dojox/mvc/at",//
-		"./DecoratorWidget",//
 		"dijit/form/NumberTextBox"//
 
 		],
-		function(array, lang, declare, at, DecoratorWidget, NumberTextBox) {
+		function(array, lang, declare, at, NumberTextBox) {
 
 			return declare(
 					"app.TextAttributeFactory",

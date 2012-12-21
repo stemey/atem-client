@@ -2,10 +2,8 @@ define([ "dojo/_base/array", //
 "dojo/_base/lang",//
 "dojo/_base/declare",//
 "dojox/mvc/at",//
-"./DecoratorWidget",//
-"dojo/store/Memory",//
 "dijit/form/Select"//
-], function(array, lang, declare, at, DecoratorWidget, Memory, Select) {
+], function(array, lang, declare, at, Select) {
 
 	return declare("app.SelectAttributeFactory", [], {
 

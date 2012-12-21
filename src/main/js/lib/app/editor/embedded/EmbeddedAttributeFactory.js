@@ -2,14 +2,13 @@ define([ "dojo/_base/array", //
 "dojo/_base/lang",//
 "dojo/_base/declare",//
 "dojox/mvc/at",//
-"./embedded/GroupPanelWidget",//
-"./embedded/SingleTypePanelWidget",//
-"./AttributeListWidget",//
+"./GroupPanelWidget",//
+"./SingleTypePanelWidget",//
 "dijit/layout/StackContainer",//
 "dojo/Stateful",//
 "dijit/TitlePane"//
 
-], function(array, lang, declare, at, GroupPanelWidget, SingleTypePanelWidget,AttributeListWidget,
+], function(array, lang, declare, at, GroupPanelWidget, SingleTypePanelWidget,
 		StackContainer,  Stateful, TitlePane) {
 
 	return declare("app.EmbeddedGroupFactory", [],{

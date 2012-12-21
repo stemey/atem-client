@@ -5,7 +5,7 @@ define([ "dojo/_base/array", //
 "./DecoratorWidget",//
 "./ExpandableDecoratorWidget",//
 "./AttributeListWidget",//
-"./AttributeFactoryFinder"
+"../AttributeFactoryFinder"
 
 ], function(array, lang, declare, at, DecoratorWidget, ExpandableDecoratorWidget, AttributeListWidget,
 		AttributeFactoryFinder) {

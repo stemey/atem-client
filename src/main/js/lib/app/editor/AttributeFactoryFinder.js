@@ -1,21 +1,19 @@
 define([ "dojo/_base/array", //
 "dojo/_base/lang",//
 "dojo/_base/declare",//
-"./TextAttributeFactory",//
-"./BooleanAttributeFactory",//
-"./SelectAttributeFactory",//
-"./AccessTokenAttributeFactory",//
-"./MappedSelectAttributeFactory",//
-"./EmbeddedAttributeFactory2",//
-"./IntegerAttributeFactory",//
-"./SelectArrayAttributeFactory",//
-"./AttributeListWidget",//
+"./primitive/TextAttributeFactory",//
+"./primitive/BooleanAttributeFactory",//
+"./primitive/SelectAttributeFactory",//
+"./primitive/MappedSelectAttributeFactory",//
+"./embedded/EmbeddedAttributeFactory",//
+"./primitive/IntegerAttributeFactory",//
+"./group/AttributeListWidget",//
 "./list_embedded/RepeatedEmbeddedAttributeFactory"
 
 ], function(array, lang, declare, TextAttributeFactory,
 		BooleanAttributeFactory, SelectAttributeFactory,
-		AccessTokenAttributeFactory, MappedSelectAttributeFactory,EmbeddedAttributeFactory,
-		IntegerAttributeFactory, SelectArrayAttributeFactory,
+ MappedSelectAttributeFactory,EmbeddedAttributeFactory,
+		IntegerAttributeFactory, 
 		AttributeListWidget, RepeatedEmbeddedAttributeFactory) {
 
 	var AttributeFactoryFinder = declare("app.editor.AttributeFactoryFinder",
@@ -27,7 +25,7 @@ define([ "dojo/_base/array", //
 				attributeFactories : [ //
 				new RepeatedEmbeddedAttributeFactory(),//
 				new EmbeddedAttributeFactory(),//
-				new SelectArrayAttributeFactory(),//
+				//new SelectArrayAttributeFactory(),//
 				new IntegerAttributeFactory(),//
 				new SelectAttributeFactory(), // 
 				new BooleanAttributeFactory(), // 
