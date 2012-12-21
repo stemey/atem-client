@@ -3,7 +3,7 @@ define([ "dojo/_base/array", //
 "dojo/_base/declare",//
 "dojox/mvc/at",//
 "./embedded/GroupPanelWidget",//
-"./SingleTypePanelWidget",//
+"./embedded/SingleTypePanelWidget",//
 "./AttributeListWidget",//
 "dijit/layout/StackContainer",//
 "dojo/Stateful",//
@@ -104,10 +104,17 @@ define([ "dojo/_base/array", //
 //				panelWidget = editor;
 //			}
 			
-			panelWidget = new GroupPanelWidget({
-				"modelHandle":modelHandle,
-				"meta":attribute
-			});
+			if (attribute.validTypes && attribute.validTypes.length>1) {
+				panelWidget = new GroupPanelWidget({
+					"modelHandle":modelHandle,
+					"meta":attribute
+				});
+			}else{
+				panelWidget = new SingleTypePanelWidget({
+					"modelHandle":modelHandle,
+					"meta":attribute
+				});
+			}	
 
 			return panelWidget;
 

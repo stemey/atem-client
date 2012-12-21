@@ -3,10 +3,11 @@ define([ "dojo/_base/array", //
 "dojo/_base/declare",//
 "dojox/mvc/at",//
 "./DecoratorWidget",//
+"./ExpandableDecoratorWidget",//
 "./AttributeListWidget",//
 "./AttributeFactoryFinder"
 
-], function(array, lang, declare, at, DecoratorWidget, AttributeListWidget,
+], function(array, lang, declare, at, DecoratorWidget, ExpandableDecoratorWidget, AttributeListWidget,
 		AttributeFactoryFinder) {
 
 	return declare("app.Groupfactory", null, {
@@ -25,9 +26,16 @@ define([ "dojo/_base/array", //
 			var listWidget = new AttributeListWidget();
 			array.forEach(group.type.attributes, function(attribute) {
 				var label = attribute.label;
-				var widget = new DecoratorWidget({
-					label : label
-				});
+				if (attribute.type.attributes || attribute.validTypes)
+				{
+					var widget = new ExpandableDecoratorWidget({
+						label : label
+					});
+				}else{
+					var widget = new DecoratorWidget({
+						label : label
+					});
+				}
 				var attributeEditor = this.createAttribute(attribute,
 						modelHandle);
 				if (attributeEditor != null) {

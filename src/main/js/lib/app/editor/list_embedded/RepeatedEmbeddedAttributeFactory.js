@@ -6,11 +6,13 @@ define([ "dojo/_base/array", //
 "../DecoratorWidget",//
 "dojo/store/Memory",//
 "dojox/mvc/StatefulArray",//
+"dojo/Stateful",//
 "./EmbeddedListWidget",//
 "dojox/mvc/sync",//
-"dojox/mvc/WidgetList"//
+"dojox/mvc/WidgetList",//
+"./RepeatedEmbeddedWidget",//
 ], function(array, lang, Editor, declare, at, DecoratorWidget, Memory,
-		StatefulArray, EmbeddedListWidget, sync, WidgetList) {
+		StatefulArray, Stateful,EmbeddedListWidget, sync, WidgetList,RepeatedEmbeddedWidget) {
 
 	return declare("app.RepeatedEmbeddedAttributeFactory", [], {
 
@@ -21,11 +23,14 @@ define([ "dojo/_base/array", //
 		create : function(attribute, modelHandle) {
 
 			var model = new dojo.Stateful();
-			var items = new StatefulArray(modelHandle.get(attribute.code));
-			model.set("items", items);
+			
+			var items = new StatefulArray([]);
+			array.forEach(modelHandle.get(attribute.code),function(e){items.push(new Stateful(e))},this);
+			modelHandle.set(attribute.code, items);
 
 			var select = new EmbeddedListWidget({
-				target : model
+				target : modelHandle,
+				attribute:attribute.code
 			});
 
 			var childModel = modelHandle.get(attribute.code);
@@ -33,9 +38,10 @@ define([ "dojo/_base/array", //
 			var widgetList = new WidgetList();
 			widgetList.set("partialrebuild", true);
 			widgetList.set("children", items);
-			widgetList.set("childClz", app.Editor);
+			widgetList.set("childClz", RepeatedEmbeddedWidget);
 			widgetList.set("childParams", {
-				meta : attribute.type
+				meta : attribute.type,
+				_relTargetProp : "modelHandle"
 			});
 			select.addChild(widgetList);
 

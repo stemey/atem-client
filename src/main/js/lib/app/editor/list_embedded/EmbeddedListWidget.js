@@ -8,10 +8,11 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dijit/_WidgetBase",
 	return declare("app.EmbeddedListWidget", [ _WidgetBase, _Container,
 			_TemplatedMixin, _WidgetsInTemplateMixin ], {
 		templateString : template,
+		attribute:null,
 		_addElement : function() {
-			this.target.items.push(new dojo.Stateful({
-				value : null,
-				options : this.target.options
+			this.target[this.attribute].push(new dojo.Stateful({
+//				value : null,
+//				options : this.target.options
 			}));
 		},
 		postCreate : function() {
