@@ -5,13 +5,14 @@ dependencies = {
 		dependencies: [
 		                "app/ApplicationController"
 		]
-	},
+	}
+	,
 	{
 		name: "../app/dependencies.js",
 		dependencies: [
 		                "dojo/_base/declare",
 		                "dojo/require",
-			        	"dojo/parser",
+			        	"dojo/parser"
 			]
 	}
 	],
@@ -19,7 +20,8 @@ dependencies = {
 	prefixes: [
 		[ "dijit", "../dijit" ],
 		[ "dojox", "../dojox" ],
-		[ "app", "../../app" ]
+		[ "gform", "../gform" ],
+		[ "app", "../app" ]
 	]
 
 };

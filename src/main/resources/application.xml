@@ -37,6 +37,7 @@
 		<property name="serviceProviders">
 			<list>
 				<bean class="org.atemsource.atem.service.meta.service.provider.resource.SingletonProvider">
+					<property name="uriPath" value="/entity/entities"/>
 					<property name="typeFilter">
 						<bean class="org.atemsource.atem.adminclient.BoundTypeFilter">
 							<property name="binder" ref="atem-example-binder"></property>
