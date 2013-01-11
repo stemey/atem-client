@@ -1,7 +1,12 @@
 define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./SingletonWidget", "dojo/Stateful",
 		"app/service/MetaService", "app/service/RestService", 'dojo/data/ItemFileReadStore', 'app/lib/beautify',
-		'gform/getPlainValue', 'gform/EditorFactory' ], function(array, lang, declare, SingletonWidget, Stateful,
-		metaService, restService, ItemFileReadStore, beautify, getPlainValue, EditorFactory) {
+		'gform/getPlainValue', 'gform/EditorFactory',//
+		"dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin",
+		"dojo/text!./singleton.html"//
+		], function(array, lang, declare, SingletonWidget, Stateful,
+		metaService, restService, ItemFileReadStore, beautify, getPlainValue, EditorFactory,//
+		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template
+		) {
 	/**
 	 * select service select id fromselctor (prefilled by getEntities)
 	 * 
@@ -11,25 +16,19 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 	 * 
 	 * 
 	 */
-	declare("app.SingletonController", [ Stateful ], {
+	declare("app.SingletonController", [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin ], {
+		_relTargetProp : "target",
+		templateString : template,
 		meta : null,
 		model : new Stateful({}),
-		constructor : function() {
-			var targetModel = new Stateful({
-				editorFactory : new EditorFactory()
-			});
-			this.singletonWidget = new SingletonWidget({
-				target : targetModel,
-				controller:this
+		postCreate : function() {
+			this.target = new Stateful({
+				editorFactory : new EditorFactory(),
+				modelHandle:new Stateful({}),
+				meta:new Stateful({})
 			});
 		},
-		getWidget : function() {
-			return this.singletonWidget;
-		},
-		getTargetModel : function() {
-			return this.singletonWidget.get("target");
-		},
-		display : function(singleton) {
+		loadData : function(singleton) {
 			this.singleton = singleton;
 			// this.editor.set("modelHandle", this.model);
 			restService.loadSingleton({
@@ -40,8 +39,8 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 		},
 		onLoaded : function(entity) {
 			this.model = new Stateful(entity);
-			this.getTargetModel().get("modelHandle", this.model);
-			this.getTargetModel().set("meta", this.singleton.resourceType);
+			this.target.set("modelHandle", this.model);
+			this.target.set("meta", this.singleton.resourceType);
 		},
 		update : function() {
 			var entity = getPlainValue(this.model);

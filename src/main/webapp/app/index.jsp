@@ -25,8 +25,7 @@
 	};
 </script>
 <!-- the production app start -->
-<script src="../dojo/dojo/dojo.js" type="text/javascript">
-	
+<script src="../dojo/dojo/dojo.js"  type="text/javascript">
 </script>
 
 
@@ -43,12 +42,21 @@
 	window.restClientConfig = {
 		basePath : basePath[1]
 	};
-	require([ "dojo/domReady!", "app/ServiceController" ], function(ready,
-			serviceController) {
 
-		window.serviceController = serviceController;
-		serviceController.set("metaUrl","../../meta/");
-		serviceController.start();
+	
+	require([ "dojo/parser",// 
+	          "dojo/domReady!",//
+	          "dojox/mvc/_patches",//
+	          "dojox/mvc/Group",//
+	          	"dijit/layout/BorderContainer",//
+	          	"dijit/layout/ContentPane",//
+	          	"app/ServiceController",//
+	          ], function(parser,ready
+			) {
+		parser.parse();
+// 		window.serviceController = new ServiceController;
+// 		serviceController.set("metaUrl","../../meta/");
+// 		serviceController.start();
 	});
 </script>
 
@@ -59,22 +67,15 @@
 <body class="claro">
 
 	<div id="mainContent" style="height: 100%">
-		<div id="appContainer" dojoType="dijit.layout.BorderContainer"
+		<div id="appContainer" data-dojo-type="dijit.layout.BorderContainer"
 			style="width: 100%; height: 100%">
 			<div id="header" dojoType="dijit.layout.ContentPane" region="top">
 				<img src="../extensions/images/simyo_100_trans.png" width="100"
 					height="31" alt="simyo" class="logo" />
 				<h1>Rest Client</h1>
 			</div>
-			<div id="center" dojoType="dijit.layout.ContentPane" region="center">
-				<div data-dojo-type="dojox.mvc.Group" class="editor"
-					data-dojo-props="target: at(serviceController, 'model')">
-					<div class="row">
-						<label for="service">Service:</label> <input
-							id="service" data-dojo-type="dijit.form.FilteringSelect"
-							data-dojo-props=' value: at("rel:", "selectedService")' />
-					</div>
-					<div id="form"></div>
+			<div id="center" data-dojo-type="dijit.layout.ContentPane" region="center">
+				<div data-dojo-type="app.ServiceController" data-dojo-props="metaUrl:'../../meta/'" class="editor">
 				</div>
 
 			</div>

@@ -1,8 +1,8 @@
 define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
-		"dijit/dijit-all", "app/editor/Editor", "dojo/Stateful",
+		"dijit/dijit-all", "gform/Editor", "dojo/Stateful",
 		"app/service/MetaService", "app/service/RestService",
 		'dojo/data/ItemFileReadStore', 'app/lib/beautify',
-		'app/editor/getPlainValue' ], function(array, lang, declare, dijitall,
+		'gform/getPlainValue' ], function(array, lang, declare, dijitall,
 		Editor, Stateful, metaService, restService, ItemFileReadStore,
 		beautify, getPlainValue) {
 
