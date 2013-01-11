@@ -1,0 +1,15 @@
+[submodule "src/main/js/dojo"]
+	path = src/main/js/dojo
+	url = git://github.com/dojo/dojo.git
+[submodule "src/main/js/dijit"]
+	path = src/main/js/dijit
+	url = git://github.com/dojo/dijit.git
+[submodule "src/main/js/dojox"]
+	path = src/main/js/dojox
+	url = git://github.com/dojo/dojox.git
+[submodule "src/main/js/util"]
+	path = src/main/js/util
+	url = git://github.com/dojo/util.git
+[submodule "src/main/js/gform"]
+	path = src/main/js/gform
+	url = git://github.com/stemey/dojo-generate-form.git
