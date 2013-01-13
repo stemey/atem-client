@@ -81,12 +81,12 @@
 							<goal>build</goal>
 						</goals>
 						<configuration>
-							<workDir>${basedir}/src/main/js/lib/dojo-release-1.8/util/buildscripts/</workDir>
-							<releaseDir>../../../../../../../target/restclient/</releaseDir>
+							<workDir>${basedir}/src/main/js/util/buildscripts/</workDir>
+							<releaseDir>../../../../../target/restclient/</releaseDir>
 							<debugFrom>${basedir}/src/main/js/lib/app</debugFrom>
 							<debugTo>${basedir}/target/restclient/dojo/app/</debugTo>
-							<tempDir>../../../../../../../target/dojo/</tempDir>
-							<profile>../../../../../build/restclient</profile>
+							<tempDir>../../../../../target/dojo/</tempDir>
+							<profile>../../../build/restclient</profile>
 							<options>optimize=shrinksafe.keepLines
 								cssOptimize=comments.keepLines</options>
 						</configuration>

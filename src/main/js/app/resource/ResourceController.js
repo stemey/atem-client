@@ -1,10 +1,10 @@
 define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
-		"./SingletonWidget", "dojo/Stateful", "app/service/MetaService",
+		 "dojo/Stateful", "app/service/MetaService",
 		"app/service/RestService", 'dojo/data/ItemFileReadStore',
 		'app/lib/beautify', 'gform/getPlainValue', 'gform/EditorFactory',//
 		"dijit/_WidgetBase", "dijit/_TemplatedMixin",
 		"dijit/_WidgetsInTemplateMixin", "dojo/text!./resource.html"//
-], function(array, lang, declare, SingletonWidget, Stateful, metaService,
+], function(array, lang, declare, Stateful, metaService,
 		restService, ItemFileReadStore, beautify, getPlainValue, EditorFactory,//
 		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template) {
 	/**
@@ -46,7 +46,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
 			// this.dataGrid.setStore(this.store);
 			this.grid._setStore(this.store);
 		},
-		fixLayout() {
+		fixLayout: function() {
 			dojo.forEach(this.meta.collection.columns, function(col) {
 				if (!col.width) {
 					col.width = "100px";
