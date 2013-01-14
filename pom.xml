@@ -83,7 +83,7 @@
 						<configuration>
 							<workDir>${basedir}/src/main/js/util/buildscripts/</workDir>
 							<releaseDir>../../../../../target/restclient/</releaseDir>
-							<debugFrom>${basedir}/src/main/js/lib/app</debugFrom>
+							<debugFrom>${basedir}/src/main/js/app</debugFrom>
 							<debugTo>${basedir}/target/restclient/dojo/app/</debugTo>
 							<tempDir>../../../../../target/dojo/</tempDir>
 							<profile>../../../build/restclient</profile>
