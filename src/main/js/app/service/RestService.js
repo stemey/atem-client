@@ -41,7 +41,8 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 					var url = request.singleton.uriPath;
 					var xhrArgs = {
 						url : url,
-						content: dojo.toJson(request.entity),
+						putData: dojo.toJson(request.entity),
+						headers:{"Content-Type":"application/json"},
 						handleAs : "json",
 						load : function(data) {
 							request.callback(data);
@@ -52,7 +53,6 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 						}
 					}
 
-					xhrArgs.content = request.params;
 					var deferred = dojo.xhrPut(xhrArgs);
 
 				}

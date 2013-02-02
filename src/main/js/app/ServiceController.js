@@ -2,7 +2,7 @@ define(
 		[ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
 				"dojo/Stateful", "app/service/MetaService",
 				"app/service/RestService", 'dojo/data/ItemFileReadStore',
-				'app/lib/beautify', './SingletonController',
+				'app/lib/beautify', './SingletonController','./ObservationController',
 				// './resource/ResourceController',//
 				"dijit/registry",//
 				"dijit/form/FilteringSelect",//
@@ -14,7 +14,7 @@ define(
 
 		],
 		function(array, lang, declare, Stateful, metaService, restService,
-				ItemFileReadStore, beautify, SingletonController,
+				ItemFileReadStore, beautify, SingletonController,ObservationController,
 				// ResourceController,//
 				registry, //
 				FilteringSelect,//
@@ -74,7 +74,7 @@ define(
 							var service = this.target.get("selectedService");
 							var meta = metaService.getMeta(service);
 							if (meta) {
-								var controller=this.singleton;
+								var controller=this.observation;
 								controller.loadData(meta);
 							}
 

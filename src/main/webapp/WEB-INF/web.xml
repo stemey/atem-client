@@ -13,6 +13,22 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
+	<listener>
+		<listener-class>org.atemsource.atem.adminclient.observer.BayeuxServerListener</listener-class>
+	</listener>
+
+
+	
+ <filter>
+    <filter-name>observation</filter-name>
+    <filter-class>org.atemsource.atem.adminclient.observer.ObservationFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>observation</filter-name>
+    <url-pattern>/entity/*</url-pattern>
+  </filter-mapping>
+	
 	<servlet>
 		<servlet-name>MetaServlet</servlet-name>
 		<servlet-class>org.atemsource.atem.service.meta.service.http.MetaServlet
@@ -35,6 +51,10 @@
 	
     <servlet>
         <servlet-name>cometd</servlet-name>
+<!-- 				<init-param> -->
+<!--             <param-name>jsonContext</param-name> -->
+<!--             <param-value>org.cometd.server.JacksonJSONContextServer</param-value> -->
+<!--         </init-param>        -->
         <servlet-class>org.cometd.server.CometdServlet</servlet-class>
         <async-supported>true</async-supported>                                          
     </servlet>

@@ -19,6 +19,7 @@
 
 	<import resource="classpath:/atem/service/meta/editor.xml" />
 	<import resource="classpath:/atem/jackson/entitytype-example.xml" />
+	<import resource="classpath:/meta/utility/observer-example.xml" />
 	<import resource="example.xml" />
 	
 <!-- 	<bean -->
@@ -57,6 +58,9 @@
 	<bean class="org.atemsource.atem.adminclient.observer.ObserverPublisher">
 	</bean>
 
+	<bean class="org.atemsource.atem.adminclient.ObserverInitializer">
+	</bean>
+
 	<bean id="atem-utility-binder" class="org.atemsource.atem.utility.binding.Binder">
 		<property name="typeFilter" ref="model-repository" />
 		<property name="subRepository" ref="atem-json-repository" />
@@ -89,6 +93,7 @@
 				<ref bean="atem-attribute-repository" />
 				<ref bean="atem-transformation-subrepository" />
 				<ref bean="atem-json-repository" />
+				<ref bean="atem-snapshot-repository" />
 				<ref bean="model-repository" />
 				<ref bean="example-repository" />
 			</list>

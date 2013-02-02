@@ -25,7 +25,12 @@
 	};
 </script>
 <!-- the production app start -->
-<script src="../dojo/dojo/dojo.js"  type="text/javascript">
+<script src="../dojo/dojo/dojo.js"   data-dojo-config="async: true, paths: { 
+                'dojox/cometd': '../cometd-dojo/cometd' , 
+                'org/cometd': '../cometd-dojo/org/cometd' 
+            }" type="text/javascript">
+
+
 </script>
 
 
@@ -70,8 +75,8 @@
 		<div id="appContainer" data-dojo-type="dijit.layout.BorderContainer"
 			style="width: 100%; height: 100%">
 			<div id="header" dojoType="dijit.layout.ContentPane" region="top">
-				<img src="../extensions/images/simyo_100_trans.png" width="100"
-					height="31" alt="simyo" class="logo" />
+				<img src="../extensions/images/xx_100_trans.png" width="100"
+					height="31" alt="xx" class="logo" />
 				<h1>Rest Client</h1>
 			</div>
 			<div id="center" data-dojo-type="dijit.layout.ContentPane" region="center">
