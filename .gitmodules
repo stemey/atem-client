@@ -13,3 +13,9 @@
 [submodule "src/main/js/gform"]
 	path = src/main/js/gform
 	url = git://github.com/stemey/dojo-generate-form.git
+[submodule "cometd-dojo"]
+	path = cometd-dojo
+	url = git://github.com/cometd/cometd-dojo.git
+[submodule "src/main/js/cometd-dojo"]
+	path = src/main/js/cometd-dojo
+	url = git://github.com/cometd/cometd-dojo.git
