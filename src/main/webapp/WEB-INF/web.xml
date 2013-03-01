@@ -14,14 +14,14 @@
 		</listener-class>
 	</listener>
 	<listener>
-		<listener-class>org.atemsource.atem.adminclient.observer.BayeuxServerListener</listener-class>
+		<listener-class>org.atemsource.atem.service.observer.BayeuxServerListener</listener-class>
 	</listener>
 
 
 	
  <filter>
     <filter-name>observation</filter-name>
-    <filter-class>org.atemsource.atem.adminclient.observer.ObservationFilter</filter-class>
+    <filter-class>org.atemsource.atem.service.observer.ObservationFilter</filter-class>
   </filter>
 
   <filter-mapping>

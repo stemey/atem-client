@@ -26,7 +26,7 @@
 	</bean>
 
 	<bean class="org.atemsource.atem.service.meta.service.http.MetaRestService">
-		<property name="binder" ref="atem-utility-binder" />
+		<property name="binder" ref="meta-binder" />
 		<property name="objectMapper">
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />
 		</property>

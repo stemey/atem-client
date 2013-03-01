@@ -26,6 +26,9 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array" ],
 				onLoaded : function(data) {
 					this.meta = data;
 				},
+				getSessionId: function() {
+					return this.meta.sessionId;
+				},
 
 				getServices : function() {
 					var services = [];

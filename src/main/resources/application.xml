@@ -17,70 +17,20 @@
 
 
 
-	<import resource="classpath:/atem/service/meta/editor.xml" />
 	<import resource="classpath:/atem/jackson/entitytype-example.xml" />
+	<import resource="classpath:/meta/utility/transform-complete.xml" />
 	<import resource="classpath:/meta/utility/observer-example.xml" />
 	<import resource="example.xml" />
-	
-<!-- 	<bean -->
-<!-- 		class="org.atemsource.atem.service.meta.service.binding.EditorTransformationFactory"> -->
-<!-- 		<property name="subrepository" ref="atem-json-repository" /> -->
-<!-- 		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" /> -->
-<!-- 	</bean> -->
+	<import resource="editor.xml"/>
 
-<!-- 	<bean -->
-<!-- 		class="org.atemsource.atem.service.meta.service.binding.SchemaTransformationFactory"> -->
-<!-- 		<property name="subrepository" ref="atem-json-repository" /> -->
-<!-- 		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" /> -->
-<!-- 	</bean> -->
-	
-	<bean class="org.atemsource.atem.service.meta.service.provider.MetaProvider">
-		<property name="serviceProviders">
-			<list>
-				<bean class="org.atemsource.atem.service.meta.service.provider.resource.SingletonProvider">
-					<property name="uriPath" value="/entity/entities"/>
-					<property name="typeFilter">
-						<bean class="org.atemsource.atem.adminclient.BoundTypeFilter">
-							<property name="binder" ref="atem-example-binder"></property>
-							<property name="typeFilter" ref="example-repository"></property>
-						</bean>
-					</property>
-				</bean>
-			</list>
-		</property>
-	</bean>
 
 	<bean id="model-repository" parent="abstract-atem-scanned-pojo-repository">
-		<property name="includedPackage" value="org.atemsource.atem.service.meta.service.model" />
+		<property name="includedPackage"
+			value="org.atemsource.atem.service.meta.service.model" />
 	</bean>
 
 
-	<bean class="org.atemsource.atem.adminclient.observer.ObserverPublisher">
-	</bean>
-
-	<bean class="org.atemsource.atem.adminclient.ObserverInitializer">
-	</bean>
-
-	<bean id="atem-utility-binder" class="org.atemsource.atem.utility.binding.Binder">
-		<property name="typeFilter" ref="model-repository" />
-		<property name="subRepository" ref="atem-json-repository" />
-		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
-		<property name="typeNameConverter">
-			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
-				<property name="prefix" value="json" />
-			</bean>
-		</property>
-	</bean>
-
-	<bean id="atem-example-binder" class="org.atemsource.atem.utility.binding.Binder">
-		<property name="typeFilter" ref="example-repository" />
-		<property name="subRepository" ref="atem-json-repository" />
-		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
-		<property name="typeNameConverter">
-			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
-				<property name="prefix" value="json" />
-			</bean>
-		</property>
+	<bean class="org.atemsource.atem.service.observer.ObserverPublisher">
 	</bean>
 
 
@@ -96,6 +46,52 @@
 				<ref bean="atem-snapshot-repository" />
 				<ref bean="model-repository" />
 				<ref bean="example-repository" />
+			</list>
+		</property>
+	</bean>
+	
+	
+		<bean id="meta-binder" class="org.atemsource.atem.utility.binding.Binder">
+		<property name="typeFilter" ref="model-repository" />
+		<property name="subRepository" ref="atem-json-repository" />
+		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
+		<property name="typeNameConverter">
+			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
+				<property name="prefix" value="json-meta" />
+			</bean>
+		</property>
+	</bean>
+
+	
+
+	<bean id="atem-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
+		<property name="entityTypeServices">
+			<map>
+				<entry key="org.atemsource.atem.service.entity.CrudService">
+					<bean class="org.atemsource.atem.service.meta.type.DerivedCrudService" />
+				</entry>
+				<entry key="org.atemsource.atem.service.entity.ObservationService">
+					<bean
+						class="org.atemsource.atem.service.meta.type.DerivedEntityObservationService" >
+							<property name="comparisonBuilderFactory" ref="atem-utility-comparisonBuilderFactory"/>
+							<property name="entityObserverFactory" ref="atem-utility-entityObserverFactoryBuilderFactory"/>
+						</bean>
+				</entry>
+			</map>
+		</property>
+		<property name="objectMapper">
+			<bean class="org.codehaus.jackson.map.ObjectMapper"/>
+		</property>
+	</bean>
+	
+	<bean class="org.atemsource.atem.service.meta.service.provider.MetaProvider">
+		<property name="serviceProviders">
+			<list>
+				<bean class="org.atemsource.atem.service.meta.service.provider.resource.SingletonProvider">
+					<property name="typeFilter">
+						<ref bean="atem-utility-binder"/>
+					</property>
+				</bean>
 			</list>
 		</property>
 	</bean>
