@@ -1,10 +1,10 @@
 define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./SingletonWidget", "dojo/Stateful",
 		"app/service/MetaService", "app/service/RestService", 'dojo/data/ItemFileReadStore', 'app/lib/beautify',
-		'gform/getPlainValue', 'gform/EditorFactory',//
+		'gform/getPlainValue', 'gform/createStandardEditorFactory',//
 		"dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin",
 		"dojo/text!./singleton.html"//
 		], function(array, lang, declare, SingletonWidget, Stateful,
-		metaService, restService, ItemFileReadStore, beautify, getPlainValue, EditorFactory,//
+		metaService, restService, ItemFileReadStore, beautify, getPlainValue, createStandardEditorFactory,//
 		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template
 		) {
 	/**
@@ -23,7 +23,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 		model : new Stateful({}),
 		postCreate : function() {
 			this.target = new Stateful({
-				editorFactory : new EditorFactory(),
+				editorFactory : createStandardEditorFactory(),
 				modelHandle:new Stateful({}),
 				meta:new Stateful({})
 			});
@@ -38,12 +38,10 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 
 		},
 		onLoaded : function(entity) {
-			this.model = new Stateful(entity);
-			this.target.set("modelHandle", this.model);
-			this.target.set("meta", this.singleton.resourceType);
+			this.target.setMetaAndPlainValue(entity, this.singleton.resourceType);
 		},
 		update : function() {
-			var entity = getPlainValue(this.model);
+			var entity = this.target.get("plainValue");
 			restService.updateSingleton({
 				singleton : this.singleton,
 				entity : entity

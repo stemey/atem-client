@@ -22,7 +22,7 @@ dependencies = {
 		[ "dojox", "../dojox" ],
 		[ "gform", "../gform" ],
 		['dojox/cometd', '../cometd-dojo/cometd'] , 
-        ['org/cometd', '../cometd-dojo/org/cometd],
+        ['org/cometd', '../cometd-dojo/org/cometd'],
         [ "app", "../app" ]
 	]
 

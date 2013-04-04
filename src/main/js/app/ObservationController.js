@@ -1,10 +1,10 @@
 define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./SingletonWidget", "dojo/Stateful",
 		"app/service/MetaService", "app/service/RestService", 'dojo/data/ItemFileReadStore', 'app/lib/beautify',
-		'gform/getPlainValue', 'gform/EditorFactory',//
+		'gform/getPlainValue', 'gform/createStandardEditorFactory',//
 		"dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin",
 		"dojo/text!./observation.html","app/service/ObservationService"//
 		], function(array, lang, declare, SingletonWidget, Stateful,
-		metaService, restService, ItemFileReadStore, beautify, getPlainValue, EditorFactory,//
+		metaService, restService, ItemFileReadStore, beautify, getPlainValue, createStandardEditorFactory,//
 		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,observationService
 		) {
 	/**
@@ -38,9 +38,8 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 
 		},
 		onLoaded : function(entity) {
-			this.editor.set("editorFactory", new EditorFactory());
-			this.editor.set("plainValue", entity);
-			this.editor.set("meta", this.singleton.resourceType);
+			this.editor.set("editorFactory", createStandardEditorFactory());
+			this.editor.setMetaAndPlainValue(this.singleton.resourceType, entity);
 			observationService.observe(this.singleton.topic,lang.hitch(this,"onMessage"));
 		},
 		onMessage: function(e) {

@@ -20,8 +20,9 @@
 	<import resource="classpath:/atem/jackson/entitytype-example.xml" />
 	<import resource="classpath:/meta/utility/transform-complete.xml" />
 	<import resource="classpath:/meta/utility/observer-example.xml" />
+	<import resource="classpath:/atem/annotation/entitytype.xml" />
 	<import resource="example.xml" />
-	<import resource="editor.xml"/>
+	<import resource="editor.xml" />
 
 
 	<bean id="model-repository" parent="abstract-atem-scanned-pojo-repository">
@@ -32,7 +33,14 @@
 
 	<bean class="org.atemsource.atem.service.observer.ObserverPublisher">
 	</bean>
+	
+	<bean id="constraints-repository" parent="atem-annotation-repository">
+		<property name="includedPackage" value="javax.validation.constraints"/>
+	</bean>
 
+	<bean class="org.atemsource.atem.impl.annotation.AnnotationMetaAttributeService">
+		<property name="annotationTypeFilter" ref="constraints-repository"/>
+	</bean>
 
 	<bean id="atem-repository"
 		class="org.atemsource.atem.impl.common.EntityTypeRepositoryImpl"
@@ -46,12 +54,14 @@
 				<ref bean="atem-snapshot-repository" />
 				<ref bean="model-repository" />
 				<ref bean="example-repository" />
+				<ref bean="service-repository" />
+				<ref bean="constraints-repository"/>
 			</list>
 		</property>
 	</bean>
-	
-	
-		<bean id="meta-binder" class="org.atemsource.atem.utility.binding.Binder">
+
+
+	<bean id="meta-binder" class="org.atemsource.atem.utility.binding.Binder">
 		<property name="typeFilter" ref="model-repository" />
 		<property name="subRepository" ref="atem-json-repository" />
 		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
@@ -62,7 +72,7 @@
 		</property>
 	</bean>
 
-	
+
 
 	<bean id="atem-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
 		<property name="entityTypeServices">
@@ -72,24 +82,65 @@
 				</entry>
 				<entry key="org.atemsource.atem.service.entity.ObservationService">
 					<bean
-						class="org.atemsource.atem.service.meta.type.DerivedEntityObservationService" >
-							<property name="comparisonBuilderFactory" ref="atem-utility-comparisonBuilderFactory"/>
-							<property name="entityObserverFactory" ref="atem-utility-entityObserverFactoryBuilderFactory"/>
-						</bean>
+						class="org.atemsource.atem.service.meta.type.DerivedEntityObservationService">
+						<property name="comparisonBuilderFactory" ref="atem-utility-comparisonBuilderFactory" />
+						<property name="entityObserverFactory"
+							ref="atem-utility-entityObserverFactoryBuilderFactory" />
+					</bean>
 				</entry>
 			</map>
 		</property>
 		<property name="objectMapper">
-			<bean class="org.codehaus.jackson.map.ObjectMapper"/>
+			<bean class="org.codehaus.jackson.map.ObjectMapper" />
 		</property>
 	</bean>
-	
+
 	<bean class="org.atemsource.atem.service.meta.service.provider.MetaProvider">
 		<property name="serviceProviders">
 			<list>
-				<bean class="org.atemsource.atem.service.meta.service.provider.resource.SingletonProvider">
+				<bean
+					class="org.atemsource.atem.service.meta.service.provider.resource.SingletonProvider">
 					<property name="typeFilter">
-						<ref bean="atem-utility-binder"/>
+						<ref bean="atem-utility-binder" />
+					</property>
+				</bean>
+				<bean
+					class="org.atemsource.atem.service.meta.service.provider.method.MethodProvider">
+					<property name="packageSearchPath"
+						value="org/atemsource/atem/adminclient/service/**">
+					</property>
+					<property name="baseUri"
+						value="/spring">
+					</property>
+					<property name="requestBodyCreator">
+						<bean class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.BoundRequestBodyCreator">
+							<property name="binder" ref="service-binder"/>
+						</bean>
+					</property>
+					<property name="creators">
+						<list>
+							<bean
+								class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.DatetimeParamCreator">
+								<property name="mappings">
+									<bean
+										class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.Mappings" />
+								</property>
+							</bean>
+							<bean
+								class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.EnumParamCreator">
+								<property name="mappings">
+									<bean
+										class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.Mappings" />
+								</property>
+							</bean>
+							<bean
+								class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.DefaultParamCreator">
+								<property name="mappings">
+									<bean
+										class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.Mappings" />
+								</property>
+							</bean>
+						</list>
 					</property>
 				</bean>
 			</list>

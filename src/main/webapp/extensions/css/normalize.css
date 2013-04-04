@@ -25,7 +25,6 @@ body { margin: 0; font-size: 13px; line-height: 1.231; }
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection declarations have to be separate
- * Also: simyo orange! (or customize the background color to match your design)
  */
 
 ::-moz-selection { background: #f60; color: #fff; text-shadow: none; }

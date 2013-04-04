@@ -44,6 +44,16 @@
 			<list>
 				<bean
 					class="org.atemsource.atem.service.meta.service.binding.AttributeDescriptionMixin" />
+				<bean
+					class="org.atemsource.atem.service.meta.service.binding.validation.PatternMixin" />
+				<bean
+					class="org.atemsource.atem.service.meta.service.binding.validation.SizeMixin" />
+				<bean
+					class="org.atemsource.atem.service.meta.service.binding.validation.MinMixin" />
+				<bean
+					class="org.atemsource.atem.service.meta.service.binding.validation.MaxMixin" />
+				<bean
+					class="org.atemsource.atem.service.meta.service.binding.validation.RequiredMixin" />
 			</list>
 		</property>
 	</bean>
@@ -69,6 +79,8 @@
 			</bean>
 		</property>
 	</bean>
+	
+
 
 
 </beans>

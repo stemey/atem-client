@@ -63,7 +63,22 @@
         <url-pattern>/cometd/*</url-pattern>
     </servlet-mapping>
 
+	<servlet>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+				<init-param>
+            <param-name>contextAttribute</param-name>
+            <param-value>org.springframework.web.context.WebApplicationContext.ROOT</param-value>
+        </init-param>       
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>/spring/*</url-pattern>
+    </servlet-mapping>
+    
+    
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.html</location>

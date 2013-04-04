@@ -31,6 +31,60 @@
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />
 		</property>
 	</bean>
+	
+	<bean id="defaultObjectMapper"  class="org.codehaus.jackson.map.ObjectMapper" />
+	
+	<context:component-scan base-package="org.atemsource.atem.adminclient.service"/>
+	
+	
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	  <property name="mediaTypes">
+	    <map>
+	       <entry key="json" value="application/json"/>
+	    </map>
+	  </property>
+	  <property name="viewResolvers">
+	    <list>
+	      <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+	    </list>
+	  </property>
+	  <property name="defaultViews">
+	    <list>
+	      <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+	    </list>
+	  </property>
+	</bean>
+	
+		<bean id="messageAdapter"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<!-- Support binary data -->
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<!-- Support JSON -->
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+					<property name="objectMapper" ref="defaultObjectMapper" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
+	<bean id="exceptionMessageAdapter"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
+		<property name="messageConverters">
+			<list>
+				<!-- Support JSON -->
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+					<property name="objectMapper">
+						<ref local="defaultObjectMapper" />
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+		
 
 </beans>

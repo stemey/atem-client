@@ -5,7 +5,7 @@
 <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
 <meta http-equiv="PRAGMA" content="NO-CACHE">
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<title>simyo Rest Client</title>
+<title>Atem Rest Client</title>
 
 <link rel="stylesheet" type="text/css"
 	href="../dojo/dojo/resources/dojo.css" />
