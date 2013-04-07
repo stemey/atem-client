@@ -53,7 +53,7 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 					var xhrArgs = {
 						url : url,
 						handleAs : "json",
-						headers: { "Content-Type": "application/json"},
+						headers: { "Content-Type": this.getContentType(request)},
 						load : function(data) {
 							request.callback(data);
 						},
@@ -65,12 +65,15 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 					if (request.requestBody) {
 						xhrArgs.postData=dojo.toJson(request.requestBody);
 					}else{
-						xhrArgs.request.params;
+						xhrArgs.content=request.params;
 					}
 
 					var deferred = dojo.xhrPost(xhrArgs);
 
-				},				
+				},		
+				getContentType: function(request) {
+					return (request.requestBody?"application/json":"application/x-www-form-urlencoded")
+				},
 				executePut : function(request) {
 					var me = this;
 					var url = request.meta.uriPattern;
@@ -78,7 +81,7 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 					var xhrArgs = {
 						url : url,
 						handleAs : "json",
-						headers: { "Content-Type": "application/json"},
+						headers: { "Content-Type": this.getContentType(request)},
 						load : function(data) {
 							request.callback(data);
 						},
@@ -90,7 +93,7 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 					if (request.requestBody) {
 						xhrArgs.postData=dojo.toJson(request.requestBody);
 					}else{
-						xhrArgs.request.params;
+						xhrArgs.content=request.params;
 					}
 
 					var deferred = dojo.xhrPut(xhrArgs);

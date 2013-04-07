@@ -80,3 +80,23 @@ body,html {
 	margin-top:20px;
 	display:block;
 }
+
+		/* styling for json response */
+		pre.response code[class]:after {
+		  content: 'highlight: ' attr(class);
+		  display: block; text-align: right;
+		  font-size: smaller;
+		  color: #CCC; background: white;
+		  border-top: solid 1px;
+		  padding-top: 0.5em;
+		}
+		
+		pre code {
+		  display: block;
+		}
+		
+		code {
+		  background: #F0F0F0;
+		}
+
+

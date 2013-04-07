@@ -1,10 +1,11 @@
 define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./SingletonWidget", "dojo/Stateful",
 		"app/service/MetaService", "app/service/RestService", 'dojo/data/ItemFileReadStore', 'app/lib/beautify',
 		'gform/getPlainValue', 'gform/createStandardEditorFactory',//
-		"dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dojo/text!./method.html"//
+		"dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dojo/text!./method.html", "dojo/query",//
+		 "dojox/highlight", "dojox/highlight/languages/javascript", "dojox/highlight/widget/Code"
 ], function(array, lang, declare, SingletonWidget, Stateful, metaService, restService, ItemFileReadStore, beautify,
 		getPlainValue, createStandardEditorFactory,//
-		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template) {
+		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, query, highlight) {
 
 
 	return declare("app.MethodController", [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin ], {
@@ -29,18 +30,14 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 
 			if (this.meta.params) {
 				this.editorParams.domNode.style.display="initial";
-				this.editorParams.setMetaAndPlainValue( {
-					attributes : this.meta.params
-				},{});
+				this.editorParams.setMetaAndPlainValue(this.meta.params,{});
 			}else{
 				this.editorParams.domNode.style.display="none";
 			}
 
 			if (this.meta.pathVariables) {
 				this.editorVariables.domNode.style.display="initial";
-				this.editorVariables.setMetaAndPlainValue( {
-					attributes : this.meta.pathVariables
-				},{});
+				this.editorVariables.setMetaAndPlainValue(this.meta.pathVariables,{});
 			}else{
 				this.editorVariables.domNode.style.display="none";
 			}
@@ -54,7 +51,11 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 
 		},
 		onRestResponse : function(response) {
-			this.displayArea.innerHTML=dojo.toJson(response,true);
+			this.displayArea.innerHTML="<pre class='response'><code class='javascript'></code></pre>";
+			var nodes=query("pre > code",this.displayArea);
+			var node=nodes[0];
+			node.innerHTML=dojo.toJson(response,true);
+			 highlight.init(node);
 		},
 		hideResponse : function(e) {
 			this.displayArea.innerHTML="";
@@ -114,9 +115,6 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 					callback : callback
 				});
 			}
-		},
-		onMetaChanged : function() {
-			// clear response
 		}
 	});
 
