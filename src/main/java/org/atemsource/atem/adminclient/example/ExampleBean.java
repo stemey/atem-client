@@ -7,8 +7,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ExampleBean {
+	/**
+	 * just a simple text
+	 */
 	private String text;
+	/**
+	 * a number
+	 */
 	private int number;
+	/**
+	 * some associated thingies
+	 */
 	@Association(targetType = ExampleThing.class)
 	private List<ExampleThing> things;
 

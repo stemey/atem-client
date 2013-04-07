@@ -1,12 +1,13 @@
 package org.atemsource.atem.adminclient.service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.validation.constraints.Pattern;
 
-import org.joda.time.DateTime;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,24 +32,34 @@ public class SpringExampleRestService {
 	}
 
 	/**
-	 * find some data.
+	 * find the cars.
 	 * 
 	 * @param search
-	 *            search token
+	 *            matched against a fragment of the car label
 	 * @return The search result
 	 */
 	@RequestMapping(value = "/car", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Car> findCar(
 			@RequestParam(required = false, value = "search") @Pattern(regexp = "[a-zA-Z0-9 ]*", message = "may only contain alphanumeric characters") String search) {
-		return list;
+		if (StringUtils.isEmpty(search)) {
+			return list;
+		} else {
+			List<Car> filtered = new LinkedList<Car>();
+			for (Car car : list) {
+				if (car.getLabel().contains(search)) {
+					filtered.add(car);
+				}
+			}
+			return filtered;
+		}
 	}
 
 	/**
 	 * post some data.
 	 * 
 	 * @param car
-	 *            add a car to the collection
+	 *            the car added
 	 */
 	@RequestMapping(value = "/car", method = RequestMethod.PUT)
 	@ResponseBody
@@ -60,8 +71,9 @@ public class SpringExampleRestService {
 	/**
 	 * post some data.
 	 * 
-	 * @param car
-	 *            add a car to the collection
+	 * @param index
+	 *            the index of the car to remove
+	 * 
 	 */
 	@RequestMapping(value = "/car/{index}", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -71,13 +83,17 @@ public class SpringExampleRestService {
 	}
 
 	/**
-	 * post some data.
+	 * update a car
 	 * 
-	 * @param car
-	 *            add a car to the collection
+	 * @param index
+	 *            the index of the car
+	 * @param label
+	 *            its new label
+	 * @param length
+	 *            its new length
 	 */
-	@RequestMapping(value = "/car/{index}", method = RequestMethod.PUT)
 	@ResponseBody
+	@RequestMapping(value = "/car/{index}", method = RequestMethod.POST)
 	public void updateCar(@PathVariable(value = "index") int index, @RequestParam("label") String label,
 			@RequestParam("length") int length) {
 		Car car = list.get(index);

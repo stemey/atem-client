@@ -1,6 +1,9 @@
 package org.atemsource.atem.adminclient.example;
 
 public class ExampleThing {
+	/**
+	 * really?
+	 */
 	private boolean yes;
 
 	public boolean isYes() {

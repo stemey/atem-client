@@ -22,6 +22,8 @@
 <!-- 	<import resource="classpath:/meta/utility/transform-complete.xml" /> -->
 <!-- 	<import resource="classpath:/atem/jackson/entitytype-example.xml" /> -->
 
+	<import resource="classpath:/atem/javadoc/javadoc.xml" />
+
 	<bean abstract="true" id="attributeTransformationFactory"
 		class="org.atemsource.atem.service.meta.service.binding.AbstractAttributeTransformationFactory">
 		<property name="subRepository" ref="atem-json-repository" />
@@ -54,6 +56,10 @@
 					class="org.atemsource.atem.service.meta.service.binding.validation.MaxMixin" />
 				<bean
 					class="org.atemsource.atem.service.meta.service.binding.validation.RequiredMixin" />
+				<bean
+					class="org.atemsource.atem.service.meta.service.binding.springrest.RequestParamMixin" />
+				<bean
+					class="org.atemsource.atem.service.meta.service.binding.javadoc.JavadocMixin" />
 			</list>
 		</property>
 	</bean>

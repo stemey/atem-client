@@ -21,6 +21,7 @@
 	<import resource="classpath:/meta/utility/transform-complete.xml" />
 	<import resource="classpath:/meta/utility/observer-example.xml" />
 	<import resource="classpath:/atem/annotation/entitytype.xml" />
+	<import resource="classpath:/atem/impl/method.xml" />
 	<import resource="example.xml" />
 	<import resource="editor.xml" />
 
@@ -37,9 +38,15 @@
 	<bean id="constraints-repository" parent="atem-annotation-repository">
 		<property name="includedPackage" value="javax.validation.constraints"/>
 	</bean>
+	<bean id="springrest-annotation-repository" parent="atem-annotation-repository">
+		<property name="includedPackage" value="org.springframework.web.bind.annotation"/>
+	</bean>
 
 	<bean class="org.atemsource.atem.impl.annotation.AnnotationMetaAttributeService">
 		<property name="annotationTypeFilter" ref="constraints-repository"/>
+	</bean>
+	<bean class="org.atemsource.atem.impl.annotation.AnnotationMetaAttributeService">
+		<property name="annotationTypeFilter" ref="springrest-annotation-repository"/>
 	</bean>
 
 	<bean id="atem-repository"
@@ -55,7 +62,9 @@
 				<ref bean="model-repository" />
 				<ref bean="example-repository" />
 				<ref bean="service-repository" />
+				<ref bean="springrest-annotation-repository"/>
 				<ref bean="constraints-repository"/>
+				<ref bean="atem-javadoc-repository"/>
 			</list>
 		</property>
 	</bean>
@@ -112,35 +121,12 @@
 					<property name="baseUri"
 						value="/spring">
 					</property>
+					<property name="jsonRepository" ref="atem-json-repository"/>
+					<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory"/>
 					<property name="requestBodyCreator">
 						<bean class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.BoundRequestBodyCreator">
 							<property name="binder" ref="service-binder"/>
 						</bean>
-					</property>
-					<property name="creators">
-						<list>
-							<bean
-								class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.DatetimeParamCreator">
-								<property name="mappings">
-									<bean
-										class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.Mappings" />
-								</property>
-							</bean>
-							<bean
-								class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.EnumParamCreator">
-								<property name="mappings">
-									<bean
-										class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.Mappings" />
-								</property>
-							</bean>
-							<bean
-								class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.DefaultParamCreator">
-								<property name="mappings">
-									<bean
-										class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.Mappings" />
-								</property>
-							</bean>
-						</list>
 					</property>
 				</bean>
 			</list>

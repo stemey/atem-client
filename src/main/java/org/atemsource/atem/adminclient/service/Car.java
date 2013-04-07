@@ -16,6 +16,9 @@ public class Car {
 		super();
 	}
 
+	/**
+	 * name of the car
+	 */
 	@Pattern(regexp="[0-9a-zA-Z]+")
 	@Size(min=5,max=20)
 	@NotNull
@@ -29,6 +32,9 @@ public class Car {
 		this.length = length;
 	}
 
+	/**
+	 * length of the car
+	 */
 	@Min(100)
 	private int length;
 
