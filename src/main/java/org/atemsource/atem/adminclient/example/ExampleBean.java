@@ -2,6 +2,8 @@ package org.atemsource.atem.adminclient.example;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.atemsource.atem.api.attribute.annotation.Association;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,7 @@ public class ExampleBean {
 	/**
 	 * just a simple text
 	 */
+	@NotNull
 	private String text;
 	/**
 	 * a number

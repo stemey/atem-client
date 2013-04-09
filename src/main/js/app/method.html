@@ -1,11 +1,21 @@
 <div>
-		<div data-dojo-type="gform/Editor" data-dojo-attach-point="editorParams"></div>
+		<dl>
+		  <dt>Uri</dt>
+		    <dd data-dojo-type="dojox/mvc/Output" data-dojo-props="value: at('model','uriPattern')">Black hot drink</dd>
+		  <dt>Milk</dt>
+		    <dd>White cold drink</dd>
+		</dl> 
+		<h4>Path variables</h4>
 		<div data-dojo-type="gform/Editor" data-dojo-attach-point="editorVariables"></div>
+		<h4>Request parameters</h4>
+		<div data-dojo-type="gform/Editor" data-dojo-attach-point="editorParams"></div>
+		<h4>Request body (content-type application/json)</h4>
 		<div data-dojo-type="gform/Editor" data-dojo-attach-point="editorBody"></div>
+		<h4>Result</h4>
 		<div data-dojo-attach-point="displayArea" >
 			<pre class="response">
 						<code  class="javascript"></code>
 			</pre>
 		</div>
-		<button data-dojo-attach-event="onclick:submit">update</button>
+		<button data-dojo-attach-event="onclick:submit">execute</button>
 </div>

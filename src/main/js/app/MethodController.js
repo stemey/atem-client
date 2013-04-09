@@ -2,7 +2,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 		"app/service/MetaService", "app/service/RestService", 'dojo/data/ItemFileReadStore', 'app/lib/beautify',
 		'gform/getPlainValue', 'gform/createStandardEditorFactory',//
 		"dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dojo/text!./method.html", "dojo/query",//
-		 "dojox/highlight", "dojox/highlight/languages/javascript", "dojox/highlight/widget/Code"
+		 "dojox/highlight", "dojox/highlight/languages/javascript", "dojox/highlight/widget/Code", "dojox/mvc/Output"
 ], function(array, lang, declare, SingletonWidget, Stateful, metaService, restService, ItemFileReadStore, beautify,
 		getPlainValue, createStandardEditorFactory,//
 		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, query, highlight) {
@@ -12,6 +12,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 		templateString:template,
 		editor : null,
 		meta : null,
+		model:new Stateful({uriPattern:""}),
 		constructor : function() {
 		},
 		postCreate : function() {
@@ -27,6 +28,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 
 			this.hideResponse();
 			this.set("meta", meta);
+			this.model.set("uriPattern",meta.uriPattern);
 
 			if (this.meta.params) {
 				this.editorParams.domNode.style.display="initial";
@@ -73,6 +75,13 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 			}
 			return totalErrorCount==0;
 		},
+		getValuesFromEditor: function(editor,meta) {
+			if (meta) {
+				return editor.get("plainValue");
+			}else{
+				return undefined;
+			}
+		},
 		submit : function() {
 			var valid=this.validate();
 			if (!valid) {
@@ -85,32 +94,32 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 
 			if (this.meta.verb=="GET") {
 				restService.executeGet({
-					params : plainParams,
-					variables : this.editorVariables.get("plainValue"),
+					params : this.getValuesFromEditor(this.editorParams,this.meta.params),
+					variables : this.getValuesFromEditor(this.editorVariables,this.meta.pathVariables),
 					meta : this.meta,
 					callback : callback
 				});
 			}else if (this.meta.verb=="POST") {
 				restService.executePost({
-					params : plainParams,
-					variables : this.editorVariables.get("plainValue"),
-					requestBody : this.editorBody.get("plainValue"),
+					params : this.getValuesFromEditor(this.editorParams,this.meta.params),
+					variables : this.getValuesFromEditor(this.editorVariables,this.meta.pathVariables),
+					requestBody : this.getValuesFromEditor(this.editorBody,this.meta.requestBody),
 					meta : this.meta,
 					callback : callback
 				});
 			}else if (this.meta.verb=="PUT") {
 				restService.executePut({
-					params : plainParams,
-					variables : this.editorVariables.get("plainValue"),
-					requestBody : this.editorBody.get("plainValue"),
+					params : this.getValuesFromEditor(this.editorParams,this.meta.params),
+					variables : this.getValuesFromEditor(this.editorVariables,this.meta.pathVariables),
+					requestBody : this.getValuesFromEditor(this.editorBody,this.meta.requestBody),
 					meta : this.meta,
 					callback : callback
 				});
 			}else if (this.meta.verb=="DELETE") {
 				restService.executeDelete({
-					params : plainParams,
-					variables : this.editorVariables.get("plainValue"),
-					requestBody : this.editorBody.get("plainValue"),
+					params : this.getValuesFromEditor(this.editorParams,this.meta.params),
+					variables : this.getValuesFromEditor(this.editorVariables,this.meta.pathVariables),
+					requestBody : this.getValuesFromEditor(this.editorBody,this.meta.requestBody),
 					meta : this.meta,
 					callback : callback
 				});
