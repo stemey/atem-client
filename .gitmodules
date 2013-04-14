@@ -19,3 +19,6 @@
 [submodule "src/main/js/cometd-dojo"]
 	path = src/main/js/cometd-dojo
 	url = git://github.com/cometd/cometd-dojo.git
+[submodule "src/main/js/gridx"]
+	path = src/main/js/gridx
+	url = git://github.com/oria/gridx.git
