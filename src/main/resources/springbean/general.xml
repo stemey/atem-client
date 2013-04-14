@@ -17,7 +17,6 @@
 
 
 
-	<!-- <import resource="classpath:/meta/utility/transform-complete.xml" /> -->
 	<import resource="classpath:/meta/utility/binding.xml" />
 	<import resource="classpath:/atem/pojo/entitytype.xml" />
 	<import resource="classpath:/atem/jackson/entitytype.xml" />
@@ -27,30 +26,9 @@
 		class="org.atemsource.atem.service.meta.type.SpringBeanCrudService" />
 	<bean id="springBeanObservationService"
 		class="org.atemsource.atem.service.meta.type.SpringBeanObservationService" />
-
-
-
-	<bean id="service-repository" parent="abstract-atem-scanned-pojo-repository">
-		<property name="includedPackage" value="org.atemsource.atem.adminclient.service" />
-	</bean>
-
-
-	
-	<bean id="service-binder" class="org.atemsource.atem.utility.binding.Binder">
-		<property name="typeFilter" ref="service-repository" />
-		<property name="subRepository" ref="atem-json-repository" />
-		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
-		<property name="typeNameConverter">
-			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
-				<property name="prefix" value="json" />
-			</bean>
-		</property>
-	</bean>
-	
-
-
 	
 
 	<bean id="applicationScopeObserverTrigger" class="org.atemsource.atem.adminclient.ApplicationScopeObserverTrigger"/>
+
 
 </beans>

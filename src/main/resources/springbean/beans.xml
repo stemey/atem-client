@@ -15,29 +15,54 @@
            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
+	<context:component-scan base-package="org.atemsource.atem.adminclient.example">
+	</context:component-scan>
 
-
-	<!-- <import resource="classpath:/meta/utility/transform-complete.xml" /> -->
-	<import resource="classpath:/meta/utility/binding.xml" />
-	<import resource="classpath:/atem/pojo/entitytype.xml" />
-	<import resource="classpath:/atem/jackson/entitytype.xml" />
-
-
-	<bean id="springBeanCrudService"
-		class="org.atemsource.atem.service.meta.type.SpringBeanCrudService" />
-	<bean id="springBeanObservationService"
-		class="org.atemsource.atem.service.meta.type.SpringBeanObservationService" />
-
-
-
-	<bean id="service-repository" parent="abstract-atem-scanned-pojo-repository">
-		<property name="includedPackage" value="org.atemsource.atem.adminclient.service" />
+	<bean id="simpleThing" class="org.atemsource.atem.adminclient.example.ExampleThing">
+		<property name="yes" value="true" />
 	</bean>
 
+	<bean id="configuredBean" class="org.atemsource.atem.adminclient.example.ExampleBean">
+		<property name="number" value="123" />
+		<property name="text" value="Hallo" />
+		<property name="things">
+			<list>
+				<bean class="org.atemsource.atem.adminclient.example.ExampleThing">
+					<property name="yes" value="true" />
+				</bean>
+				<bean class="org.atemsource.atem.adminclient.example.ExampleThing">
+					<property name="yes" value="false" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
+	<bean id="configuredBean2" class="org.atemsource.atem.adminclient.example.ExampleBean">
+		<property name="number" value="444" />
+		<property name="text" value="bye bye" />
+		<property name="things">
+			<list>
+				<bean class="org.atemsource.atem.adminclient.example.ExampleThing">
+					<property name="yes" value="true" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="example-repository" parent="abstract-atem-scanned-pojo-repository">
+		<property name="includedPackage" value="org.atemsource.atem.adminclient.example" />
+		<property name="entityTypeServices">
+			<map>
+				<entry key="org.atemsource.atem.service.entity.CrudService"
+					value-ref="springBeanCrudService" />
+				<entry key="org.atemsource.atem.service.entity.ObservationService"
+					value-ref="springBeanObservationService" />
+			</map>
+		</property>
+	</bean>
 	
-	<bean id="service-binder" class="org.atemsource.atem.utility.binding.Binder">
-		<property name="typeFilter" ref="service-repository" />
+	<bean id="example-binder" class="org.atemsource.atem.utility.binding.Binder">
+		<property name="typeFilter" ref="example-repository" />
 		<property name="subRepository" ref="atem-json-repository" />
 		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
 		<property name="typeNameConverter">
@@ -46,11 +71,5 @@
 			</bean>
 		</property>
 	</bean>
-	
-
-
-	
-
-	<bean id="applicationScopeObserverTrigger" class="org.atemsource.atem.adminclient.ApplicationScopeObserverTrigger"/>
 
 </beans>

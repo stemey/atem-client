@@ -23,20 +23,12 @@
 	<import resource="classpath:/atem/jackson/entitytype.xml" />
 
 
-	<bean id="springBeanCrudService"
-		class="org.atemsource.atem.service.meta.type.SpringBeanCrudService" />
-	<bean id="springBeanObservationService"
-		class="org.atemsource.atem.service.meta.type.SpringBeanObservationService" />
 
-
-
-	<bean id="service-repository" parent="abstract-atem-scanned-pojo-repository">
+	<bean id="springrest-repository" parent="abstract-atem-scanned-pojo-repository">
 		<property name="includedPackage" value="org.atemsource.atem.adminclient.service" />
 	</bean>
 
-
-	
-	<bean id="service-binder" class="org.atemsource.atem.utility.binding.Binder">
+	<bean id="springrest-binder" class="org.atemsource.atem.utility.binding.Binder">
 		<property name="typeFilter" ref="service-repository" />
 		<property name="subRepository" ref="atem-json-repository" />
 		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
@@ -47,10 +39,5 @@
 		</property>
 	</bean>
 	
-
-
-	
-
-	<bean id="applicationScopeObserverTrigger" class="org.atemsource.atem.adminclient.ApplicationScopeObserverTrigger"/>
 
 </beans>
