@@ -18,7 +18,7 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 						},
 						error : function(error) {
 							console.log("error ", error)
-							request.callback(error.response.text);
+							request.error(error);
 						}
 					}
 
@@ -38,7 +38,7 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 						},
 						error : function(error) {
 							console.log("error ", error)
-							request.callback(error.response.text);
+							request.error(error);
 						}
 					}
 
@@ -59,7 +59,7 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 						},
 						error : function(error) {
 							console.log("error ", error)
-							request.callback(error.response.text);
+							request.error(error);
 						}
 					}
 					if (request.requestBody) {
@@ -87,7 +87,7 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array",
 						},
 						error : function(error) {
 							console.log("error ", error)
-							request.callback(error.response.text);
+							request.error(error);
 						}
 					}
 					if (request.requestBody) {

@@ -13,6 +13,10 @@
 	href="../dojo/dijit/themes/claro/claro.css" />
 <link rel="stylesheet" type="text/css"
 	href="../extensions/css/restclient.css" />
+<link rel="stylesheet" type="text/css"
+	href="../dojo/dojox/highlight/resources/highlight.css" />
+<link rel="stylesheet" type="text/css"
+	href="../dojo/dojox/highlight/resources/pygments/default.css" />
 
 <script>
 	require = {

@@ -2,17 +2,18 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 		"app/service/MetaService", "app/service/RestService", 'dojo/data/ItemFileReadStore', 'app/lib/beautify',
 		'gform/getPlainValue', 'gform/createStandardEditorFactory',//
 		"dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dojo/text!./method.html", "dojo/query",//
-		 "dojox/highlight", "dojox/highlight/languages/javascript", "dojox/highlight/widget/Code", "dojox/mvc/Output"
+		 "dojox/highlight", "dojox/highlight/languages/javascript", "dojox/highlight/widget/Code", "dojox/mvc/Output", "dojox/mvc/Group"
 ], function(array, lang, declare, SingletonWidget, Stateful, metaService, restService, ItemFileReadStore, beautify,
 		getPlainValue, createStandardEditorFactory,//
 		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, query, highlight) {
 
 
 	return declare("app.MethodController", [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin ], {
+		_relTargetProp : "model",
 		templateString:template,
 		editor : null,
 		meta : null,
-		model:new Stateful({uriPattern:""}),
+		model:new Stateful(),
 		constructor : function() {
 		},
 		postCreate : function() {
@@ -29,6 +30,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 			this.hideResponse();
 			this.set("meta", meta);
 			this.model.set("uriPattern",meta.uriPattern);
+			this.model.set("verb",meta.verb);
 
 			if (this.meta.params) {
 				this.editorParams.domNode.style.display="initial";
@@ -58,6 +60,11 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 			var node=nodes[0];
 			node.innerHTML=dojo.toJson(response,true);
 			 highlight.init(node);
+			this.model.set("statusCode",200);
+		},
+		onRestError : function(error) {
+			this.displayArea.innerHTML="";
+			this.model.set("statusCode",error.response.status);
 		},
 		hideResponse : function(e) {
 			this.displayArea.innerHTML="";
@@ -89,6 +96,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 			}
 			
 			var callback = lang.hitch(this, "onRestResponse");
+			var error = lang.hitch(this, "onRestError");
 			var plainParams = this.editorParams.get("plainValue");
 			this.hideResponse();
 
@@ -97,7 +105,8 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 					params : this.getValuesFromEditor(this.editorParams,this.meta.params),
 					variables : this.getValuesFromEditor(this.editorVariables,this.meta.pathVariables),
 					meta : this.meta,
-					callback : callback
+					callback : callback,
+					error : error
 				});
 			}else if (this.meta.verb=="POST") {
 				restService.executePost({
@@ -105,7 +114,8 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 					variables : this.getValuesFromEditor(this.editorVariables,this.meta.pathVariables),
 					requestBody : this.getValuesFromEditor(this.editorBody,this.meta.requestBody),
 					meta : this.meta,
-					callback : callback
+					callback : callback,
+					error : error
 				});
 			}else if (this.meta.verb=="PUT") {
 				restService.executePut({
@@ -113,7 +123,8 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 					variables : this.getValuesFromEditor(this.editorVariables,this.meta.pathVariables),
 					requestBody : this.getValuesFromEditor(this.editorBody,this.meta.requestBody),
 					meta : this.meta,
-					callback : callback
+					callback : callback,
+					error : error
 				});
 			}else if (this.meta.verb=="DELETE") {
 				restService.executeDelete({
@@ -121,7 +132,8 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 					variables : this.getValuesFromEditor(this.editorVariables,this.meta.pathVariables),
 					requestBody : this.getValuesFromEditor(this.editorBody,this.meta.requestBody),
 					meta : this.meta,
-					callback : callback
+					callback : callback,
+					error : error
 				});
 			}
 		}
