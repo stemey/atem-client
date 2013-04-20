@@ -15,6 +15,8 @@
            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
+	<import resource="general.xml"/>
+
 	<context:component-scan base-package="org.atemsource.atem.adminclient.example">
 	</context:component-scan>
 
@@ -49,7 +51,7 @@
 		</property>
 	</bean>
 
-	<bean id="example-repository" parent="abstract-atem-scanned-pojo-repository">
+	<bean id="springbean-repository" parent="abstract-atem-scanned-pojo-repository">
 		<property name="includedPackage" value="org.atemsource.atem.adminclient.example" />
 		<property name="entityTypeServices">
 			<map>
@@ -62,8 +64,8 @@
 	</bean>
 	
 	<bean id="example-binder" class="org.atemsource.atem.utility.binding.Binder">
-		<property name="typeFilter" ref="example-repository" />
-		<property name="subRepository" ref="atem-json-repository" />
+		<property name="typeFilter" ref="springbean-repository" />
+		<property name="subRepository" ref="springbean-json-repository" />
 		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
 		<property name="typeNameConverter">
 			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
@@ -71,5 +73,13 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="springbean-provider"
+		class="org.atemsource.atem.service.meta.service.provider.resource.SingletonProvider">
+		<property name="typeFilter">
+			<ref bean="example-binder" />
+		</property>
+	</bean>
+	
 
 </beans>

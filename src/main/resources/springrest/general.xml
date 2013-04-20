@@ -18,39 +18,25 @@
 
 
 	<!-- <import resource="classpath:/meta/utility/transform-complete.xml" /> -->
-	<import resource="classpath:/meta/utility/binding.xml" />
-	<import resource="classpath:/atem/pojo/entitytype.xml" />
-	<import resource="classpath:/atem/jackson/entitytype.xml" />
+<!-- 	<import resource="classpath:/atem/jackson/entitytype-example.xml" /> -->
+<!-- 	<import resource="classpath:/meta/utility/transform-complete.xml" /> -->
+<!-- 	<import resource="classpath:/atem/annotation/entitytype.xml" /> -->
+<!-- 	<import resource="classpath:/meta/utility/binding.xml" /> -->
+<!-- 	<import resource="classpath:/atem/pojo/entitytype.xml" /> -->
 
-
-	<bean id="springBeanCrudService"
-		class="org.atemsource.atem.service.meta.type.SpringBeanCrudService" />
-	<bean id="springBeanObservationService"
-		class="org.atemsource.atem.service.meta.type.SpringBeanObservationService" />
-
-
-
-	<bean id="service-repository" parent="abstract-atem-scanned-pojo-repository">
-		<property name="includedPackage" value="org.atemsource.atem.adminclient.service" />
-	</bean>
-
-
-	
-	<bean id="service-binder" class="org.atemsource.atem.utility.binding.Binder">
-		<property name="typeFilter" ref="service-repository" />
-		<property name="subRepository" ref="atem-json-repository" />
-		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
-		<property name="typeNameConverter">
-			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
-				<property name="prefix" value="json" />
-			</bean>
+	<bean id="springrest-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
+		<property name="objectMapper">
+			<bean class="org.codehaus.jackson.map.ObjectMapper" />
 		</property>
 	</bean>
-	
 
+	<bean id="springrest-annotation-repository" parent="atem-annotation-repository">
+		<property name="includedPackage" value="org.springframework.web.bind.annotation"/>
+	</bean>
 
-	
+	<bean class="org.atemsource.atem.impl.annotation.AnnotationMetaAttributeService">
+		<property name="annotationTypeFilter" ref="springrest-annotation-repository"/>
+	</bean>
 
-	<bean id="applicationScopeObserverTrigger" class="org.atemsource.atem.adminclient.ApplicationScopeObserverTrigger"/>
 
 </beans>

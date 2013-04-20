@@ -16,11 +16,23 @@
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
 
-<!-- 	<context:component-scan base-package="org.atemsource.atem.service.meta"> -->
-<!-- 	</context:component-scan> -->
 
-<!-- 	<import resource="classpath:/meta/utility/transform-complete.xml" /> -->
-<!-- 	<import resource="classpath:/atem/jackson/entitytype-example.xml" /> -->
+	<bean id="service-meta-repository" parent="abstract-atem-scanned-pojo-repository">
+		<property name="includedPackage"
+			value="org.atemsource.atem.service.meta.service.model" />
+	</bean>
+
+
+	<bean id="meta-binder" class="org.atemsource.atem.utility.binding.Binder">
+		<property name="typeFilter" ref="service-meta-repository" />
+		<property name="subRepository" ref="atem-json-repository" />
+		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
+		<property name="typeNameConverter">
+			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
+				<property name="prefix" value="json-meta" />
+			</bean>
+		</property>
+	</bean>
 
 	<import resource="classpath:/atem/javadoc/javadoc.xml" />
 
@@ -71,17 +83,6 @@
 		<property name="attributeTransformationFactory">
 			<bean parent="attributeTransformationFactory" class="org.atemsource.atem.service.meta.service.binding.editor.AttributeTransformationFactory">
 				<property name="typeCodePrefix" value="editor"/>
-			</bean>
-		</property>
-	</bean>
-
-	<bean
-		class="org.atemsource.atem.service.meta.service.binding.schema.SchemaTransformationFactory">
-		<property name="subrepository" ref="atem-json-repository" />
-		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
-		<property name="attributeTransformationFactory">
-		<bean parent="attributeTransformationFactory" class="org.atemsource.atem.service.meta.service.binding.schema.AttributeTransformationFactory">
-				<property name="typeCodePrefix" value="schema"/>
 			</bean>
 		</property>
 	</bean>

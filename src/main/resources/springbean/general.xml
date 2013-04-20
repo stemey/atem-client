@@ -15,11 +15,14 @@
            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
+<!-- 	<import resource="classpath:/atem/jackson/entitytype-example.xml" /> -->
+<!-- 	<import resource="classpath:/meta/utility/transform-complete.xml" /> -->
+<!-- 	<import resource="classpath:/meta/utility/observer-example.xml" /> -->
+<!-- 	<import resource="classpath:/atem/annotation/entitytype.xml" /> -->
+<!-- 	<import resource="classpath:/atem/impl/method.xml" /> -->
+<!-- 	<import resource="classpath:/meta/utility/binding.xml" /> -->
+<!-- 	<import resource="classpath:/atem/pojo/entitytype.xml" /> -->
 
-
-	<import resource="classpath:/meta/utility/binding.xml" />
-	<import resource="classpath:/atem/pojo/entitytype.xml" />
-	<import resource="classpath:/atem/jackson/entitytype.xml" />
 
 
 	<bean id="springBeanCrudService"
@@ -29,6 +32,31 @@
 	
 
 	<bean id="applicationScopeObserverTrigger" class="org.atemsource.atem.adminclient.ApplicationScopeObserverTrigger"/>
+
+	<bean class="org.atemsource.atem.service.observer.ObserverPublisher">
+	</bean>
+
+
+	<bean id="springbean-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
+		<property name="entityTypeServices">
+			<map>
+				<entry key="org.atemsource.atem.service.entity.CrudService">
+					<bean class="org.atemsource.atem.service.meta.type.DerivedCrudService" />
+				</entry>
+				<entry key="org.atemsource.atem.service.entity.ObservationService">
+					<bean
+						class="org.atemsource.atem.service.meta.type.DerivedEntityObservationService">
+						<property name="comparisonBuilderFactory" ref="atem-utility-comparisonBuilderFactory" />
+						<property name="entityObserverFactory"
+							ref="atem-utility-entityObserverFactoryBuilderFactory" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+		<property name="objectMapper">
+			<bean class="org.codehaus.jackson.map.ObjectMapper" />
+		</property>
+	</bean>
 
 
 </beans>

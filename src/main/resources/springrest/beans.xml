@@ -17,11 +17,7 @@
 
 
 
-	<!-- <import resource="classpath:/meta/utility/transform-complete.xml" /> -->
-	<import resource="classpath:/meta/utility/binding.xml" />
-	<import resource="classpath:/atem/pojo/entitytype.xml" />
-	<import resource="classpath:/atem/jackson/entitytype.xml" />
-
+	<import resource="general.xml" />
 
 
 	<bean id="springrest-repository" parent="abstract-atem-scanned-pojo-repository">
@@ -29,12 +25,29 @@
 	</bean>
 
 	<bean id="springrest-binder" class="org.atemsource.atem.utility.binding.Binder">
-		<property name="typeFilter" ref="service-repository" />
-		<property name="subRepository" ref="atem-json-repository" />
+		<property name="typeFilter" ref="springrest-repository" />
+		<property name="subRepository" ref="springbean-json-repository" />
 		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
 		<property name="typeNameConverter">
 			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
 				<property name="prefix" value="json" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="springrest-provider"
+		class="org.atemsource.atem.service.meta.service.provider.method.MethodProvider">
+		<property name="packageSearchPath"
+			value="org/atemsource/atem/adminclient/service/**">
+		</property>
+		<property name="baseUri"
+			value="/spring">
+		</property>
+		<property name="jsonRepository" ref="springbean-json-repository"/>
+		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory"/>
+		<property name="requestBodyCreator">
+			<bean class="org.atemsource.atem.service.meta.service.provider.method.paramcreator.BoundRequestBodyCreator">
+				<property name="binder" ref="springrest-binder"/>
 			</bean>
 		</property>
 	</bean>
