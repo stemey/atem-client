@@ -1,4 +1,4 @@
-package org.atemsource.atem.adminclient.service;
+package org.atemsource.atem.adminclient.springrest;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

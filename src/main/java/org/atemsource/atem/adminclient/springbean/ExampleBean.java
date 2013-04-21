@@ -1,4 +1,4 @@
-package org.atemsource.atem.adminclient.example;
+package org.atemsource.atem.adminclient.springbean;
 
 import java.util.List;
 

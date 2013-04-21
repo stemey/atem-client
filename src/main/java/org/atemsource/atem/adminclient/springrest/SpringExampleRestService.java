@@ -1,4 +1,4 @@
-package org.atemsource.atem.adminclient.service;
+package org.atemsource.atem.adminclient.springrest;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

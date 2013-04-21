@@ -21,7 +21,7 @@
 
 
 	<bean id="springrest-repository" parent="abstract-atem-scanned-pojo-repository">
-		<property name="includedPackage" value="org.atemsource.atem.adminclient.service" />
+		<property name="includedPackage" value="org.atemsource.atem.adminclient.springrest" />
 	</bean>
 
 	<bean id="springrest-binder" class="org.atemsource.atem.utility.binding.Binder">

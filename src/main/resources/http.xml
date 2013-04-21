@@ -34,7 +34,7 @@
 	
 	<bean id="defaultObjectMapper"  class="org.codehaus.jackson.map.ObjectMapper" />
 	
-	<context:component-scan base-package="org.atemsource.atem.adminclient.service"/>
+	<context:component-scan base-package="org.atemsource.atem.adminclient.springrest"/>
 	
 	
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
