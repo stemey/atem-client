@@ -17,6 +17,40 @@
 
 	<import resource="general.xml"/>
 
-	<bean class="EntityM"/>
+	<bean class="org.atemsource.atem.adminclient.jpa.ExampleDataProvider"/>
 
+
+	<bean id="jpa-repository" parent="abstract-atem-scanned-pojo-repository">
+		<property name="includedPackage" value="org.atemsource.atem.adminclient.jpa" />
+		<property name="services">
+			<set>
+				<ref bean="jpaCrudService"/>
+			</set>
+		</property>
+	</bean>
+	
+	<bean id="jpa-binder" class="org.atemsource.atem.utility.binding.Binder">
+		<property name="typeFilter" ref="jpa-repository" />
+		<property name="subRepository" ref="jpa-json-repository" />
+		<property name="transformationBuilderFactory" ref="atem-utility-transformationBuilderFactory" />
+		<property name="typeNameConverter">
+			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
+				<property name="prefix" value="json" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="jpa-provider"
+		class="org.atemsource.atem.service.meta.service.provider.resource.ResourceProvider">
+		<property name="typeFilter">
+			<ref bean="jpa-repository" />
+		</property>
+		<property name="singleBinder">
+			<ref bean="jpa-binder"/>
+		</property>
+		<property name="collectionBinder">
+			<ref bean="jpa-binder"/>
+		</property>
+	</bean>
+	
 </beans>

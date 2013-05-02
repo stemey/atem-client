@@ -53,10 +53,11 @@
 
 	<bean id="springbean-repository" parent="abstract-atem-scanned-pojo-repository">
 		<property name="includedPackage" value="org.atemsource.atem.adminclient.springbean" />
+		<property name="services">
+			<ref bean="springBeanCrudService"/>
+		</property>
 		<property name="entityTypeServices">
 			<map>
-				<entry key="org.atemsource.atem.service.entity.CrudService"
-					value-ref="springBeanCrudService" />
 				<entry key="org.atemsource.atem.service.entity.ObservationService"
 					value-ref="springBeanObservationService" />
 			</map>

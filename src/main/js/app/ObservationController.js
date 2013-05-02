@@ -40,6 +40,7 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 		onLoaded : function(entity) {
 			this.editor.set("editorFactory", createStandardEditorFactory());
 			this.editor.setMetaAndPlainValue(this.singleton.resourceType, entity);
+			this.editor.startup();
 			observationService.observe(this.singleton.topic,lang.hitch(this,"onMessage"));
 		},
 		onMessage: function(e) {
@@ -50,7 +51,8 @@ define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./Singlet
 			var entity = this.editor.get("plainValue");
 			restService.updateSingleton({
 				singleton : this.singleton,
-				entity : entity
+				entity : entity,
+				callback: function(e){console.log("updated")}
 			});
 		}
 	});

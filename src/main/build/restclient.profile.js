@@ -21,8 +21,8 @@ dependencies = {
 		[ "dijit", "../dijit" ],
 		[ "dojox", "../dojox" ],
 		[ "gform", "../gform" ],
-		['dojox/cometd', '../cometd-dojo/cometd'] , 
-        ['org/cometd', '../cometd-dojo/org/cometd'],
+		[ 'dojox/cometd', '../cometd-dojo/cometd'] , 
+        [ 'org/cometd', '../cometd-dojo/org/cometd'],
         [ "app", "../app" ]
 	]
 

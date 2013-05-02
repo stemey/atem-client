@@ -19,7 +19,6 @@
 
 	<import resource="general.xml" />
 
-
 	<bean id="springrest-repository" parent="abstract-atem-scanned-pojo-repository">
 		<property name="includedPackage" value="org.atemsource.atem.adminclient.springrest" />
 	</bean>
@@ -38,7 +37,7 @@
 	<bean id="springrest-provider"
 		class="org.atemsource.atem.service.meta.service.provider.method.MethodProvider">
 		<property name="packageSearchPath"
-			value="org/atemsource/atem/adminclient/service/**">
+			value="classpath*:org/atemsource/atem/adminclient/springrest/**/*.class">
 		</property>
 		<property name="baseUri"
 			value="/spring">

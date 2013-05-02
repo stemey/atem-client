@@ -24,39 +24,50 @@
 <!-- 	<import resource="classpath:/atem/pojo/entitytype.xml" /> -->
 
 
-
-	<bean id="springBeanCrudService"
-		class="org.atemsource.atem.service.meta.type.SpringBeanCrudService" />
-	<bean id="springBeanObservationService"
-		class="org.atemsource.atem.service.meta.type.SpringBeanObservationService" />
-	
-
-	<bean id="applicationScopeObserverTrigger" class="org.atemsource.atem.adminclient.ApplicationScopeObserverTrigger"/>
-
-	<bean class="org.atemsource.atem.service.observer.ObserverPublisher">
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="example" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="database" value="HSQL" />
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+			</bean>
+		</property>
 	</bean>
 
+	<bean id="entityManager"
+		class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/DataSource"/>
+	
 
-	<bean id="springbean-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
+	<bean id="jpaCrudService"
+		class="org.atemsource.atem.adminclient.JpaCrudService" >
+		<property name="entityManager">
+			<ref bean="entityManager"/>
+		</property>
+		<property name="jpaTransactionManager">
+			<ref bean="jpaTransactionManager"/>
+		</property>
+	</bean>
+	
+
+	<bean id="jpa-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
 		<property name="typeProperty" value="ext_type"/>
-		<property name="services">
-			<list>
-				<bean class="org.atemsource.atem.service.meta.type.DerivedBaseService"/>
-				<bean class="org.atemsource.atem.service.meta.type.DerivedStatelessForStatefulService"/>
-			</list>
-		</property>
-		<property name="entityTypeServices">
-			<map>
-				<entry key="org.atemsource.atem.service.entity.ObservationService">
-					<bean
-						class="org.atemsource.atem.service.meta.type.DerivedEntityObservationService">
-						<property name="comparisonBuilderFactory" ref="atem-utility-comparisonBuilderFactory" />
-						<property name="entityObserverFactory"
-							ref="atem-utility-entityObserverFactoryBuilderFactory" />
-					</bean>
-				</entry>
-			</map>
-		</property>
+<!-- 		<property name="services"> -->
+<!-- 			<list> -->
+<!-- 				<bean class="org.atemsource.atem.service.meta.type.DerivedBaseService"/> -->
+<!-- 				<bean class="org.atemsource.atem.service.meta.type.DerivedStatelessForStatefulService"/> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
 		<property name="objectMapper">
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />
 		</property>

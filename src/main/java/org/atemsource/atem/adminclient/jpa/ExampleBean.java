@@ -10,58 +10,71 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.atemsource.atem.api.attribute.annotation.Association;
-import org.springframework.stereotype.Component;
+
 
 @Entity
-public class ExampleBean {
-	
+public class ExampleBean
+{
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	public int getId() {
-		return id;
-	}
+	/**
+	 * a number
+	 */
+	private int number;
 
-	public void setId(int id) {
-		this.id = id;
-	}
 	/**
 	 * just a simple text
 	 */
 	@NotNull
 	private String text;
-	/**
-	 * a number
-	 */
-	private int number;
+
 	/**
 	 * some associated thingies
 	 */
-	@OneToMany(targetEntity=ExampleThing.class)
+	@OneToMany(targetEntity = ExampleThing.class)
+	@Association(targetType = ExampleThing.class)
 	private List<ExampleThing> things;
 
-	public String getText() {
-		return text;
+	public int getId()
+	{
+		return id;
 	}
 
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public int getNumber() {
+	public int getNumber()
+	{
 		return number;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public String getText()
+	{
+		return text;
 	}
 
-	public List<ExampleThing> getThings() {
+	public List<ExampleThing> getThings()
+	{
 		return things;
 	}
 
-	public void setThings(List<ExampleThing> things) {
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
+	public void setNumber(int number)
+	{
+		this.number = number;
+	}
+
+	public void setText(String text)
+	{
+		this.text = text;
+	}
+
+	public void setThings(List<ExampleThing> things)
+	{
 		this.things = things;
 	}
 }

@@ -26,6 +26,7 @@
 	<import resource="classpath:/atem/pojo/entitytype.xml" />
 	
 	<!-- project imports -->
+	<import resource="jpa/beans.xml" />
 	<import resource="springbean/beans.xml" />
 	<import resource="springrest/beans.xml" />
 	<import resource="editor.xml" />
@@ -37,6 +38,7 @@
 			<list>
 				<ref bean="springbean-provider"/>
 				<ref bean="springrest-provider"/>
+				<ref bean="jpa-provider"/>
 			</list>
 		</property>
 	</bean>
@@ -58,6 +60,8 @@
 				<ref bean="springrest-repository" />
 				<ref bean="springrest-json-repository" />
 				<ref bean="springrest-annotation-repository"/>
+				<ref bean="jpa-json-repository" />
+				<ref bean="jpa-repository" />
 				<ref bean="constraints-repository"/>
 				<ref bean="atem-javadoc-repository"/>
 			</list>
@@ -77,27 +81,30 @@
 
 <!-- general json repository -->
 	<bean id="atem-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
-		<property name="entityTypeServices">
-			<map>
-				<entry key="org.atemsource.atem.service.entity.CrudService">
-					<bean class="org.atemsource.atem.service.meta.type.DerivedCrudService" />
-				</entry>
-				<entry key="org.atemsource.atem.service.entity.ObservationService">
-					<bean
-						class="org.atemsource.atem.service.meta.type.DerivedEntityObservationService">
-						<property name="comparisonBuilderFactory" ref="atem-utility-comparisonBuilderFactory" />
-						<property name="entityObserverFactory"
-							ref="atem-utility-entityObserverFactoryBuilderFactory" />
-					</bean>
-				</entry>
-			</map>
-		</property>
 		<property name="objectMapper">
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />
 		</property>
 	</bean>
 
 
-
+	<bean id="json-transformationBuilderFactory"
+		class="org.atemsource.atem.utility.transform.api.TransformationBuilderFactory">
+		<property name="converterFactory">
+			<bean
+				class="org.atemsource.atem.utility.transform.impl.converter.ConverterFactoryImpl">
+				<property name="javaConverters">
+					<list>
+						<ref bean="atem-dateConverter" />
+					</list>
+				</property>
+				<property name="factories">
+					<list>
+						<bean
+							class="org.atemsource.atem.utility.transform.impl.converter.EnumToStringConverterFactory" />
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
 
 </beans>

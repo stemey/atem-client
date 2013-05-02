@@ -87,7 +87,17 @@
 		    <groupId>org.hsqldb</groupId>
 		    <artifactId>hsqldb</artifactId>
 		    <version>2.2.4</version>
-		</dependency>	
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hsqldb</groupId> -->
+<!-- 			<artifactId>hsqldb-j5</artifactId> -->
+<!-- 			<version>2.2.4</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<extensions>
@@ -112,7 +122,7 @@
 			<plugin>
 				<groupId>org.atemsource.dojo</groupId>
 				<artifactId>maven-dojo-build-plugin</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>1.0.2-SNAPSHOT</version>
 				<executions>
 					<execution>
 						<id>dojo</id>
@@ -205,6 +215,21 @@
 										</versionRange>
 										<goals>
 											<goal>build</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-javadoc-plugin</artifactId>
+										<versionRange>
+											[0.0.1-SNAPSHOT,)
+										</versionRange>
+										<goals>
+											<goal>javadoc</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
