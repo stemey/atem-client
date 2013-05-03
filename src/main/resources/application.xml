@@ -89,21 +89,21 @@
 
 	<bean id="json-transformationBuilderFactory"
 		class="org.atemsource.atem.utility.transform.api.TransformationBuilderFactory">
-		<property name="converterFactory">
-			<bean
-				class="org.atemsource.atem.utility.transform.impl.converter.ConverterFactoryImpl">
-				<property name="javaConverters">
-					<list>
-						<ref bean="atem-dateConverter" />
-					</list>
-				</property>
-				<property name="factories">
-					<list>
-						<bean
-							class="org.atemsource.atem.utility.transform.impl.converter.EnumToStringConverterFactory" />
-					</list>
-				</property>
-			</bean>
+		<property name="converterFactory" ref="converterFactory"/>
+	</bean>
+	
+	<bean id="converterFactory"
+		class="org.atemsource.atem.utility.transform.impl.converter.ConverterFactoryImpl">
+		<property name="javaConverters">
+			<list>
+				<ref bean="atem-dateConverter" />
+			</list>
+		</property>
+		<property name="factories">
+			<list>
+				<bean
+					class="org.atemsource.atem.utility.transform.impl.converter.EnumToStringConverterFactory" />
+			</list>
 		</property>
 	</bean>
 
