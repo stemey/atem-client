@@ -23,6 +23,9 @@
 		<property name="objectMapper">
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />
 		</property>
+		<property name="idConverterfactory">
+			<ref bean="converterFactory"/>
+		</property>
 	</bean>
 
 	<bean class="org.atemsource.atem.service.meta.service.http.MetaRestService">
