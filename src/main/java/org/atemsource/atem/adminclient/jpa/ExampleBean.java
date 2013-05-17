@@ -2,6 +2,7 @@ package org.atemsource.atem.adminclient.jpa;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +35,7 @@ public class ExampleBean
 	/**
 	 * some associated thingies
 	 */
-	@OneToMany(targetEntity = ExampleThing.class)
+	@OneToMany(targetEntity = ExampleThing.class,cascade=CascadeType.ALL)
 	@Association(targetType = ExampleThing.class)
 	private List<ExampleThing> things;
 

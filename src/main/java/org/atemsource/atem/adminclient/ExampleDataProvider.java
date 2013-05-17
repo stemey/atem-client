@@ -1,9 +1,10 @@
-package org.atemsource.atem.adminclient.jpa;
+package org.atemsource.atem.adminclient;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import org.atemsource.atem.adminclient.jpa.ExampleBean;
 import org.atemsource.atem.api.infrastructure.exception.TechnicalException;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.TransactionDefinition;

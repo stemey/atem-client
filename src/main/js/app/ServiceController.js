@@ -3,7 +3,7 @@ define(
 				"dojo/Stateful", "app/service/MetaService",
 				"app/service/RestService", 'dojo/data/ItemFileReadStore',
 				'app/lib/beautify', './SingletonController','./ObservationController','./MethodController',
-				// './resource/ResourceController',//
+				'./resource/GridController',//
 				"dijit/registry",//
 				"dijit/form/FilteringSelect",//
 				"dojox/mvc/Group",//
@@ -15,7 +15,7 @@ define(
 		],
 		function(array, lang, declare, Stateful, metaService, restService,
 				ItemFileReadStore, beautify, SingletonController,ObservationController,MethodController,
-				// ResourceController,//
+				GridController,//
 				registry, //
 				FilteringSelect,//
 				Group,//

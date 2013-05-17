@@ -59,6 +59,12 @@
 		</property>
 	</bean>
 	
+	<bean class="org.atemsource.atem.adminclient.IdentityMetaAttributeRegistrar">
+		<property name="metaAttributeService" ref="atem-memory-metaAttributeService" />
+	</bean>
+	
+		<bean class="org.atemsource.atem.adminclient.JpaEntityTypePostProcessor"/>
+	
 
 	<bean id="jpa-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
 		<property name="typeProperty" value="ext_type"/>

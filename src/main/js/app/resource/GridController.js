@@ -2,8 +2,9 @@ define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/aspect",
+	"./gform2tableStructure",
 	"gridx/Grid",
-	'gridx/core/model/cache/Sync',
+	'gridx/core/model/cache/Async',
 	"gridx/modules/VirtualVScroller",
 	"gridx/modules/ColumnResizer",
 	"gridx/modules/SingleSort",
@@ -13,8 +14,6 @@ define([
 	'gridx/modules/select/Row',
 	"dojo/store/JsonRest",
 	"dojo/json",
-	"dojo/text!./tablestructure.json",
-	"dojo/text!./table.json",
 	"./EditorController",
 	"dijit/_WidgetBase", 
 	"dijit/_TemplatedMixin",
@@ -23,9 +22,9 @@ define([
 	"dijit/layout/BorderContainer",
 	"dijit/layout/ContentPane",
 	"dijit/Toolbar"
-], function(declare, lang, aspect, Grid, Cache, 
+], function(declare, lang, aspect, gform2TableStructure, Grid, Cache, 
 	VirtualVScroller, ColumnResizer, SingleSort, Filter, Focus, RowHeader, RowSelect, 
-	 Store, json, tableStructure, tabledata, EditorController, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template){
+	 Store, json, EditorController, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template){
 
 
 	
@@ -35,10 +34,14 @@ return declare( [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 		postCreate : function() {	
 		},
 		loadData: function(resource) {
-			var props={ id: "grid"};
+			if (this.grid) {
+				this.grid.destroy();
+			}
+			var structure = gform2TableStructure(resource.tableStructure);
+			var props={ id: "grid", width: "100%", height: "100%"};
 			props.cacheClass=Cache;
-			props.structure = dojo.fromJson(resource.tableStructure);
-			this.store = new Store({url: "", idProperty: resource.idProperty});
+			props.structure = structure;
+			this.store = new Store({target: resource.collectionUriPath, idProperty: resource.idProperty});
 			props.store = this.store;
 			props.modules= [
 				VirtualVScroller,
@@ -53,9 +56,19 @@ return declare( [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 			
 			this.grid.select.row.connect(this.grid.select.row, "onSelected",lang.hitch(this,"rowSelected"));
 			this.gridContainer.addChild(this.grid);
-			this.borderContainer.layout();
-			this.editorController.set("store", this.store);
+			this.grid.startup();
+			//this.borderContainer.layout();
+			this.editorController.loadData(resource);
 			aspect.before(this.store,"remove",lang.hitch(this,"_onDelete"));
+			aspect.after(this.editorController,"_onUpdate",lang.hitch(this,"reload"));
+			aspect.after(this.editorController,"_onAdd",lang.hitch(this,"reload"));
+			aspect.after(this.editorController,"_onRemoved",lang.hitch(this,"reload"));
+			this.borderContainer.resize({w:500,h:500});
+			//this.borderContainer.resize();
+		},
+		reload:function() {
+			this.grid.model.clearCache();
+			this.grid.view.load();
 		},
 		startup: function() {
 			this.inherited(arguments);

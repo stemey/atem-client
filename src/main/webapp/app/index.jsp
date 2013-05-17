@@ -12,6 +12,10 @@
 <link rel="stylesheet" type="text/css"
 	href="../dojo/dijit/themes/claro/claro.css" />
 <link rel="stylesheet" type="text/css"
+	href="../dojo/gform/resources/gform.css" />
+<link rel="stylesheet" type="text/css"
+	href="../dojo/gridx/resources/claro/Gridx.css" />
+<link rel="stylesheet" type="text/css"
 	href="../extensions/css/restclient.css" />
 <link rel="stylesheet" type="text/css"
 	href="../dojo/dojox/highlight/resources/highlight.css" />

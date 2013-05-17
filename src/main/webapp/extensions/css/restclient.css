@@ -99,4 +99,21 @@ body,html {
 		  background: #F0F0F0;
 		}
 
-
+div.gformEditorController .new {
+	display:none;	
+}
+div.gformEditorController.create .new {
+	display:block;
+}
+div.gformEditorController .edit {
+	display:none;	
+}
+div.gformEditorController.edit .edit {
+	display:block;	
+}
+div.gformEditorController .working {
+	display:none;	
+}
+div.gformEditorController.working .working {
+	display:block;	
+}

@@ -17,7 +17,7 @@
 
 	<import resource="general.xml"/>
 
-	<bean class="org.atemsource.atem.adminclient.jpa.ExampleDataProvider"/>
+	<bean class="org.atemsource.atem.adminclient.ExampleDataProvider"/>
 
 
 	<bean id="jpa-repository" parent="abstract-atem-scanned-pojo-repository">
@@ -45,11 +45,18 @@
 		<property name="typeFilter">
 			<ref bean="jpa-repository" />
 		</property>
-		<property name="singleBinder">
-			<ref bean="jpa-binder"/>
+		<property name="singleTransformationFactory">
+			<bean class="org.atemsource.atem.service.meta.service.provider.BinderTransformationFactory">
+				<property name="binder">
+					<ref bean="jpa-binder"/>
+				</property>
+			</bean>
 		</property>
-		<property name="collectionBinder">
-			<ref bean="jpa-binder"/>
+		<property name="collectionTransformationFactory">
+			<bean class="org.atemsource.atem.service.meta.service.binding.FlatTableTransformer">
+				<property name="dynamicEntityTypeSubrepository"><ref bean="jpa-json-repository"/></property>
+				<property name="transformationBuilderFactory"><ref bean="atem-utility-transformationBuilderFactory"/></property>
+			</bean> 
 		</property>
 	</bean>
 	
