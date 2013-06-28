@@ -9,10 +9,12 @@ define([
 	"gridx/modules/ColumnResizer",
 	"gridx/modules/SingleSort",
 	"gridx/modules/Filter",
+	'gridx/modules/filter/FilterBar',
+	'gridx/core/model/extensions/Query',
 	'gridx/modules/Focus',
 	'gridx/modules/RowHeader',
 	'gridx/modules/select/Row',
-	"dojo/store/JsonRest",
+	"./QueryStore",
 	"dojo/json",
 	"./EditorController",
 	"dijit/_WidgetBase", 
@@ -23,7 +25,7 @@ define([
 	"dijit/layout/ContentPane",
 	"dijit/Toolbar"
 ], function(declare, lang, aspect, gform2TableStructure, Grid, Cache, 
-	VirtualVScroller, ColumnResizer, SingleSort, Filter, Focus, RowHeader, RowSelect, 
+	VirtualVScroller, ColumnResizer, SingleSort, Filter, FilterBar, Query, Focus, RowHeader, RowSelect, 
 	 Store, json, EditorController, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template){
 
 
@@ -41,16 +43,26 @@ return declare( [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 			var props={ id: "grid", width: "100%", height: "100%"};
 			props.cacheClass=Cache;
 			props.structure = structure;
-			this.store = new Store({target: resource.collectionUriPath, idProperty: resource.idProperty});
+			this.store = new Store({
+				target: resource.collectionUriPath, 
+				idProperty: resource.idProperty,
+				sortParam: "sortBy"
+			});
 			props.store = this.store;
 			props.modules= [
 				VirtualVScroller,
+				{
+					moduleClass: Filter,
+					serverMode: true,
+				},
+				FilterBar,
 				{
 					moduleClass: RowSelect,
 					multiple: false,
 					triggerOnCell: true,
 				},
-				RowHeader
+				RowHeader,
+				SingleSort
 			];
 			this.grid = new Grid(props);
 			

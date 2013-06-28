@@ -106,5 +106,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean class="org.atemsource.atem.adminclient.JsonRefTypeRegistrar"></bean>
+	
 
 </beans>

@@ -11,7 +11,8 @@ define([
 			return {
 				id : attribute.code,
 				field : attribute.code,
-				name : attribute.label || attribute.code
+				name : attribute.label || attribute.code,
+				dataType:attribute.type
 			}
 		})
 		return columns;

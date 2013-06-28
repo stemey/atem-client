@@ -38,7 +38,28 @@
 				<property name="prefix" value="json" />
 			</bean>
 		</property>
+		<property name="attributeConverters">
+			<list>
+				<bean class="org.atemsource.atem.utility.binding.AnnotationAttributeConverter"/>
+				<bean class="org.atemsource.atem.adminclient.JsonRefAttributeConverter">
+					<property name="embeddedAttributes">
+						<list>
+							<value>features</value>
+						</list>
+					</property>
+					<property name="jsonRefConverter">
+						<bean class="org.atemsource.atem.adminclient.JsonRefConverter">
+							<property name="entityRestService" ref="entityRestService"/>
+							<property name="objectMapper">
+								<bean class="org.codehaus.jackson.map.ObjectMapper" />
+							</property>
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
 	</bean>
+	
 	
 	<bean id="jpa-provider"
 		class="org.atemsource.atem.service.meta.service.provider.resource.ResourceProvider">

@@ -52,6 +52,8 @@
 					class="org.atemsource.atem.service.meta.service.binding.attributetype.BooleanMixin" />
 				<bean
 					class="org.atemsource.atem.service.meta.service.binding.attributetype.StringMixin" />
+				<bean
+					class="org.atemsource.atem.service.meta.service.binding.attributetype.JsonRefMixin" />
 			</set>
 		</property>
 		<property name="attributeMixins">
@@ -72,6 +74,8 @@
 					class="org.atemsource.atem.service.meta.service.binding.springrest.RequestParamMixin" />
 				<bean
 					class="org.atemsource.atem.service.meta.service.binding.javadoc.JavadocMixin" />
+				<bean
+					class="org.atemsource.atem.adminclient.IdAttributeMixin" />
 			</list>
 		</property>
 	</bean>

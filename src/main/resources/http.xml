@@ -19,7 +19,7 @@
 
 	<import resource="application.xml" />
 
-	<bean class="org.atemsource.atem.service.entity.EntityRestService">
+	<bean id="entityRestService" class="org.atemsource.atem.service.entity.EntityRestService">
 		<property name="objectMapper">
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />
 		</property>
