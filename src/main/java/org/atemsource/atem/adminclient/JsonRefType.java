@@ -7,6 +7,7 @@ public class JsonRefType extends  PrimitiveTypeImpl<ObjectNode> {
 
 	private static final String JSON_REF_TYPE_CODE = "json-ref";
 
+	
 	public String getCode() {
 		return JSON_REF_TYPE_CODE;
 	}

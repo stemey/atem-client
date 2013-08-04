@@ -5,17 +5,19 @@ import java.io.Serializable;
 import org.atemsource.atem.api.service.FindByIdService;
 import org.atemsource.atem.api.service.IdentityAttributeService;
 import org.atemsource.atem.api.type.EntityType;
+import org.atemsource.atem.api.type.Type;
 import org.atemsource.atem.service.entity.EntityRestService;
 import org.atemsource.atem.service.entity.TypeAndId;
 import org.atemsource.atem.utility.transform.api.Converter;
 import org.atemsource.atem.utility.transform.api.JavaConverter;
 import org.atemsource.atem.utility.transform.api.TransformationContext;
+import org.atemsource.atem.utility.transform.api.UniConverter;
 import org.atemsource.atem.utility.transform.impl.converter.LocalConverter;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 
-public class JsonRefConverter implements JavaConverter<Object, JsonNode> {
+public class JsonRefConverter implements JavaConverter<Object,JsonNode>{
 
 	private EntityRestService entityRestService;
 	private ObjectMapper objectMapper;
@@ -67,5 +69,6 @@ public class JsonRefConverter implements JavaConverter<Object, JsonNode> {
 
 		return new LocalConverter<J, ObjectNode>(new JsonRefConverter(), type, new JsonRefType());
 	}
+
 
 }

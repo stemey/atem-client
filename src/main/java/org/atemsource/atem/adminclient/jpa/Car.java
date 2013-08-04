@@ -22,7 +22,7 @@ public class Car {
 	private boolean powerSteering;
 	private String color;
 	@OneToMany(targetEntity=Feature.class, cascade=CascadeType.ALL)
-	@Association(targetType=Feature.class)
+	@Association(targetType=Feature.class,composition=true)
 	private List<Feature> features;
 
 	public int getCarId() {

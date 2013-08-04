@@ -1,5 +1,6 @@
 package org.atemsource.atem.adminclient.jpa;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.atemsource.atem.adminclient.JsonRefConverter;
 import org.atemsource.atem.api.attribute.annotation.Association;
@@ -28,9 +30,9 @@ public class Category {
 	}
 
 	private String label;
-	@ManyToOne(targetEntity=Car.class)
-	@Association(targetType=Car.class)
-	private Set<Car> cars;
+	@OneToMany(targetEntity=Car.class)
+	@Association(targetType=Car.class,composition=false)
+	private List<Car> cars;
 
 	public String getLabel() {
 		return label;
@@ -40,11 +42,11 @@ public class Category {
 		this.label = label;
 	}
 
-	public Set<Car> getCars() {
+	public List<Car> getCars() {
 		return cars;
 	}
 
-	public void setCars(Set<Car> cars) {
+	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
 }
