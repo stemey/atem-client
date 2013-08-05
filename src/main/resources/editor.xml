@@ -52,15 +52,15 @@
 					class="org.atemsource.atem.service.meta.service.binding.attributetype.BooleanMixin" />
 				<bean
 					class="org.atemsource.atem.service.meta.service.binding.attributetype.StringMixin" />
-				<bean
-					class="org.atemsource.atem.service.meta.service.binding.attributetype.JsonRefMixin" >
-						<property name="entityTypeToUrlConverter">
-							<bean class="org.atemsource.atem.adminclient.RestEntityTypeToUrlConverter">
-								<property name="entityRestService" ref="entityRestService">
-								</property>
-							</bean>
-						</property>
-					</bean>
+<!-- 				<bean -->
+<!-- 					class="org.atemsource.atem.service.meta.service.binding.attributetype.JsonRefMixin" > -->
+<!-- 						<property name="entityTypeToUrlConverter"> -->
+<!-- 							<bean class="org.atemsource.atem.adminclient.RestEntityTypeToUrlConverter"> -->
+<!-- 								<property name="entityRestService" ref="entityRestService"> -->
+<!-- 								</property> -->
+<!-- 							</bean> -->
+<!-- 						</property> -->
+<!-- 					</bean> -->
 			</set>
 		</property>
 		<property name="attributeMixins">

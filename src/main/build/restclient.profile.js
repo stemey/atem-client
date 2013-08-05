@@ -3,7 +3,7 @@ dependencies = {
 	layers: [{
 		name: "../app/restclient.js",
 		dependencies: [
-		                "app/ApplicationController"
+		                "app/ServiceController"
 		]
 	}
 	,
@@ -18,11 +18,12 @@ dependencies = {
 	],
 
 	prefixes: [
+        [ 'org/cometd', './cometd-dojo/org/cometd'],
+		[ 'dojox/cometd', './cometd-dojo/cometd'] , 
 		[ "dijit", "../dijit" ],
+		[ "gridx", "../gridx" ],
 		[ "dojox", "../dojox" ],
 		[ "gform", "../gform" ],
-		[ 'dojox/cometd', '../cometd-dojo/cometd'] , 
-        [ 'org/cometd', '../cometd-dojo/org/cometd'],
         [ "app", "../app" ]
 	]
 
