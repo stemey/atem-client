@@ -82,7 +82,7 @@
 				<bean
 					class="org.atemsource.atem.service.meta.service.binding.javadoc.JavadocMixin" />
 				<bean
-					class="org.atemsource.atem.adminclient.IdAttributeMixin" />
+					class="org.atemsource.atem.service.identity.IdAttributeMixin" />
 			</list>
 		</property>
 	</bean>

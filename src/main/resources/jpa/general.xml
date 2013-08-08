@@ -50,7 +50,7 @@
 	
 
 	<bean id="jpaCrudService"
-		class="org.atemsource.atem.adminclient.JpaCrudService" >
+		class="org.atemsource.atem.service.jpa.JpaCrudService" >
 		<property name="entityManager">
 			<ref bean="entityManager"/>
 		</property>
@@ -59,11 +59,11 @@
 		</property>
 	</bean>
 	
-	<bean class="org.atemsource.atem.adminclient.IdentityMetaAttributeRegistrar">
+	<bean class="org.atemsource.atem.service.identity.IdentityMetaAttributeRegistrar">
 		<property name="metaAttributeService" ref="atem-memory-metaAttributeService" />
 	</bean>
 	
-		<bean class="org.atemsource.atem.adminclient.JpaEntityTypePostProcessor"/>
+	<bean class="org.atemsource.atem.service.jpa.JpaEntityTypePostProcessor"/>
 	
 
 	<bean id="jpa-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">

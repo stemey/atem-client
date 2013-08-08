@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.atemsource.atem.adminclient.JsonRefConverter;
 import org.atemsource.atem.api.attribute.annotation.Association;
 import org.atemsource.atem.utility.transform.api.annotation.Conversion;
 
