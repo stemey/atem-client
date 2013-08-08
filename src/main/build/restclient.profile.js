@@ -18,8 +18,6 @@ dependencies = {
 	],
 
 	prefixes: [
-        [ 'org/cometd', './cometd-dojo/org/cometd'],
-		[ 'dojox/cometd', './cometd-dojo/cometd'] , 
 		[ "dijit", "../dijit" ],
 		[ "gridx", "../gridx" ],
 		[ "dojox", "../dojox" ],

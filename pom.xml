@@ -32,21 +32,21 @@
 			<artifactId>atem-rest</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.atemsource</groupId> -->
-<!-- 			<artifactId>atem-api</artifactId> -->
-<!-- 			<version>0.1.6-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.atemsource</groupId> -->
-<!-- 			<artifactId>atem-impl</artifactId> -->
-<!-- 			<version>0.2.7-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.atemsource</groupId> -->
-<!-- 			<artifactId>atem-utility</artifactId> -->
-<!-- 			<version>0.1.16-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.atemsource</groupId> -->
+		<!-- <artifactId>atem-api</artifactId> -->
+		<!-- <version>0.1.6-SNAPSHOT</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.atemsource</groupId> -->
+		<!-- <artifactId>atem-impl</artifactId> -->
+		<!-- <version>0.2.7-SNAPSHOT</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.atemsource</groupId> -->
+		<!-- <artifactId>atem-utility</artifactId> -->
+		<!-- <version>0.1.16-SNAPSHOT</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.cometd.java</groupId>
 			<artifactId>cometd-java</artifactId>
@@ -84,15 +84,15 @@
 			<version>1.0.1.Final</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.hsqldb</groupId>
-		    <artifactId>hsqldb</artifactId>
-		    <version>2.2.4</version>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.4</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.hsqldb</groupId> -->
-<!-- 			<artifactId>hsqldb-j5</artifactId> -->
-<!-- 			<version>2.2.4</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.hsqldb</groupId> -->
+		<!-- <artifactId>hsqldb-j5</artifactId> -->
+		<!-- <version>2.2.4</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -169,7 +169,7 @@
 						<goals>
 							<goal>javadoc</goal>
 						</goals>
-				</execution>
+					</execution>
 				</executions>
 				<configuration>
 					<groups>
@@ -182,17 +182,39 @@
 							<packages>org.atemsource.atem.adminclient.service</packages>
 						</group>
 					</groups>
-          <doclet>org.atemsource.atem.doc.javadoc.tool.DocmlDoclet</doclet>
-          <docletArtifact>
-            <groupId>org.atemsource</groupId>
-            <artifactId>atem-javadoc</artifactId>
-            <version>0.1.6-SNAPSHOT</version>
-          </docletArtifact>
-          <show>private</show>
-           <reportOutputDirectory>${project.build.outputDirectory}</reportOutputDirectory>
-           <destDir>.</destDir>   
-          <useStandardDocletOptions>true</useStandardDocletOptions>
+					<doclet>org.atemsource.atem.doc.javadoc.tool.DocmlDoclet</doclet>
+					<docletArtifact>
+						<groupId>org.atemsource</groupId>
+						<artifactId>atem-javadoc</artifactId>
+						<version>0.1.6-SNAPSHOT</version>
+					</docletArtifact>
+					<show>private</show>
+					<reportOutputDirectory>${project.build.outputDirectory}</reportOutputDirectory>
+					<destDir>.</destDir>
+					<useStandardDocletOptions>true</useStandardDocletOptions>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/restclient/dojo/cometd-dojo</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/js/cometd-dojo</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
