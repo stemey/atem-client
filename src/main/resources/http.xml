@@ -16,9 +16,10 @@
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
 
-
+	<context:component-scan base-package="org.atemsource.atem.adminclient.springrest"/>
 	<import resource="application.xml" />
 
+	<!-- rest service providing crud services on entities -->
 	<bean id="entityRestService" class="org.atemsource.atem.service.entity.EntityRestService">
 		<property name="objectMapper">
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />
@@ -28,17 +29,7 @@
 		</property>
 	</bean>
 
-	<bean class="org.atemsource.atem.service.meta.service.http.MetaRestService">
-		<property name="binder" ref="meta-binder" />
-		<property name="objectMapper">
-			<bean class="org.codehaus.jackson.map.ObjectMapper" />
-		</property>
-	</bean>
-	
 	<bean id="defaultObjectMapper"  class="org.codehaus.jackson.map.ObjectMapper" />
-	
-	<context:component-scan base-package="org.atemsource.atem.adminclient.springrest"/>
-	
 	
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 	  <property name="mediaTypes">
@@ -58,7 +49,7 @@
 	  </property>
 	</bean>
 	
-		<bean id="messageAdapter"
+	<bean id="messageAdapter"
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>

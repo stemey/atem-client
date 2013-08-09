@@ -16,23 +16,35 @@
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
 
-<!-- general imports -->
-	<import resource="classpath:/atem/jackson/entitytype-example.xml" />
-	<import resource="classpath:/meta/utility/transform-complete.xml" />
-	<import resource="classpath:/meta/utility/observer-example.xml" />
-	<import resource="classpath:/atem/annotation/entitytype.xml" />
-	<import resource="classpath:/atem/impl/method.xml" />
-	<import resource="classpath:/meta/utility/binding.xml" />
-	<import resource="classpath:/atem/pojo/entitytype.xml" />
+	<!-- GENERAL IMPORTS -->
 	
-	<!-- project imports -->
+	<!-- general repository imports -->
+	<import resource="classpath:/atem/jackson/entitytype-example.xml" />
+	<import resource="classpath:/atem/pojo/entitytype.xml" />
+	<import resource="classpath:/atem/annotation/entitytype.xml" />
+
+	<!-- method introspection -->
+	<import resource="classpath:/atem/impl/method.xml" />
+
+
+	<!--  transformation  -->
+	<import resource="classpath:/meta/utility/transform-complete.xml" />
+	<import resource="classpath:/meta/utility/binding.xml" />
+
+	<!--  observation -->
+	<import resource="classpath:/meta/utility/observer-example.xml" />
+
+	<!-- transformation of entity type to gform schema -->
+	<import resource="editor.xml" />
+	
+	<!-- PROJECT IMPORTS -->
 	<import resource="jpa/beans.xml" />
 	<import resource="springbean/beans.xml" />
 	<import resource="springrest/beans.xml" />
-	<import resource="editor.xml" />
+	
 
 
-	<!-- definition of all services -->
+	<!-- definition of the schema provider -->
 	<bean class="org.atemsource.atem.service.meta.service.provider.MetaProvider">
 		<property name="serviceProviders">
 			<list>
@@ -44,6 +56,7 @@
 	</bean>
 
 	
+	<!-- the entityTypeRepository -->
 	<bean id="atem-repository"
 		class="org.atemsource.atem.impl.common.EntityTypeRepositoryImpl"
 		init-method="init">
@@ -68,30 +81,18 @@
 		</property>
 	</bean>
 
-<!-- javax.bean.validation -->
-	<bean id="constraints-repository" parent="atem-annotation-repository">
-		<property name="includedPackage" value="javax.validation.constraints"/>
-	</bean>
 
+	<!-- registration of all constraints -->
 	<bean class="org.atemsource.atem.impl.annotation.AnnotationMetaAttributeService">
 		<property name="annotationTypeFilter" ref="constraints-repository"/>
 	</bean>
 
-
-
-<!-- general json repository -->
-	<bean id="atem-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
-		<property name="objectMapper">
-			<bean class="org.codehaus.jackson.map.ObjectMapper" />
-		</property>
-	</bean>
-
-
-	<bean id="json-transformationBuilderFactory"
-		class="org.atemsource.atem.utility.transform.api.TransformationBuilderFactory">
-		<property name="converterFactory" ref="converterFactory"/>
+	<!-- javax.bean.validation -->
+	<bean id="constraints-repository" parent="atem-annotation-repository">
+		<property name="includedPackage" value="javax.validation.constraints"/>
 	</bean>
 	
+	<!-- global converterFactory -->
 	<bean id="converterFactory"
 		class="org.atemsource.atem.utility.transform.impl.converter.ConverterFactoryImpl">
 		<property name="javaConverters">

@@ -15,14 +15,38 @@
            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
+	<!-- import javadoc meta attributes so that we can add javadoc to schema -->
+	<import resource="classpath:/atem/javadoc/javadoc.xml" />
 
 
+	<!-- spring rest service -->
+	<bean class="org.atemsource.atem.service.meta.service.http.MetaRestService">
+		<property name="binder" ref="meta-binder" />
+		<property name="objectMapper">
+			<bean class="org.codehaus.jackson.map.ObjectMapper" />
+		</property>
+	</bean>
+	
+
+	<!-- json repository -->
+	<bean id="atem-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
+		<property name="objectMapper">
+			<bean class="org.codehaus.jackson.map.ObjectMapper" />
+		</property>
+	</bean>
+
+	<bean id="json-transformationBuilderFactory"
+		class="org.atemsource.atem.utility.transform.api.TransformationBuilderFactory">
+		<property name="converterFactory" ref="converterFactory"/>
+	</bean>
+
+	<!-- rest service description model repository -->
 	<bean id="service-meta-repository" parent="abstract-atem-scanned-pojo-repository">
 		<property name="includedPackage"
 			value="org.atemsource.atem.service.meta.service.model" />
 	</bean>
 
-
+	<!-- binder reste service description model   -->
 	<bean id="meta-binder" class="org.atemsource.atem.utility.binding.Binder">
 		<property name="typeFilter" ref="service-meta-repository" />
 		<property name="subRepository" ref="atem-json-repository" />
@@ -34,8 +58,7 @@
 		</property>
 	</bean>
 
-	<import resource="classpath:/atem/javadoc/javadoc.xml" />
-
+	<!-- attribute transformation factory to create gform schema from entity type -->
 	<bean abstract="true" id="attributeTransformationFactory"
 		class="org.atemsource.atem.service.meta.service.binding.AbstractAttributeTransformationFactory">
 		<property name="subRepository" ref="atem-json-repository" />
@@ -87,6 +110,7 @@
 		</property>
 	</bean>
 
+	<!-- entityType transformation factory to create gform schema -->
 	<bean
 		class="org.atemsource.atem.service.meta.service.binding.editor.EditorTransformationFactory">
 		<property name="subrepository" ref="atem-json-repository" />

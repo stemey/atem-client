@@ -16,14 +16,6 @@
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
 
-
-	<!-- <import resource="classpath:/meta/utility/transform-complete.xml" /> -->
-<!-- 	<import resource="classpath:/atem/jackson/entitytype-example.xml" /> -->
-<!-- 	<import resource="classpath:/meta/utility/transform-complete.xml" /> -->
-<!-- 	<import resource="classpath:/atem/annotation/entitytype.xml" /> -->
-<!-- 	<import resource="classpath:/meta/utility/binding.xml" /> -->
-<!-- 	<import resource="classpath:/atem/pojo/entitytype.xml" /> -->
-
 	<bean id="springrest-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
 		<property name="objectMapper">
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />

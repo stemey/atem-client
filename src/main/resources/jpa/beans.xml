@@ -19,7 +19,6 @@
 
 	<bean class="org.atemsource.atem.adminclient.ExampleDataProvider"/>
 
-
 	<bean id="jpa-repository" parent="abstract-atem-scanned-pojo-repository">
 		<property name="includedPackage" value="org.atemsource.atem.adminclient.jpa" />
 		<property name="services">
@@ -41,16 +40,6 @@
 		<property name="attributeConverters">
 			<list>
 				<bean class="org.atemsource.atem.utility.binding.AnnotationAttributeConverter"/>
-<!-- 				<bean class="org.atemsource.atem.adminclient.AssociationAttributeConverter"> -->
-<!-- 					<property name="jsonRefConverter"> -->
-<!-- 						<bean class="org.atemsource.atem.adminclient.JsonRefConverter"> -->
-<!-- 							<property name="entityRestService" ref="entityRestService"/> -->
-<!-- 							<property name="objectMapper"> -->
-<!-- 								<bean class="org.codehaus.jackson.map.ObjectMapper" /> -->
-<!-- 							</property> -->
-<!-- 						</bean> -->
-<!-- 					</property> -->
-<!-- 				</bean> -->
 			</list>
 		</property>
 	</bean>

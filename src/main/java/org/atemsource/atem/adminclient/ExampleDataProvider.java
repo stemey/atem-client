@@ -11,7 +11,11 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-
+/**
+ * Persist some sample jpa entities.
+ * @author stemey
+ *
+ */
 public class ExampleDataProvider
 {
 	@Inject

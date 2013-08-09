@@ -20,6 +20,7 @@
 	<context:component-scan base-package="org.atemsource.atem.adminclient.springbean">
 	</context:component-scan>
 
+	<!-- Custom beans -->
 	<bean id="simpleThing" class="org.atemsource.atem.adminclient.springbean.ExampleThing">
 		<property name="yes" value="true" />
 	</bean>
@@ -50,6 +51,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- general beans -->
 
 	<bean id="springbean-repository" parent="abstract-atem-scanned-pojo-repository">
 		<property name="includedPackage" value="org.atemsource.atem.adminclient.springbean" />
