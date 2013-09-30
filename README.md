@@ -1,16 +1,13 @@
 atem-client
 ===========
 
-A java example web application using (atem-rest) and (gform) to administrate and observer java beans and entities.
+A java example web application using [atem-rest] and [gform] to invoke restful web services, administrate and observer java entities in an administrative user interface .
 
 ##General
 
-Gform provides automatic form generation based on json schema or gform schema. Gform is based on dojo. Atem provides powerful 
-reflection and transformation for java. (Atem rest) provides rest services to access java entities, services and their meta information via a restful api. 
-Also cometD is the basis for observing change on your data. See the list below for the technologies suported by (atem-rest).
-
-Combining these two technologies makes it easy to create generic management tools. 
-The Manager provides generic interfaces to invoke services and to create, update, delete and filter your data.
+Atem-Rest provides meta data about restful services (currently services created by Spring mvc and atem iteself are supported). Also it provides restful crud services for java entities like spring beans and jpa entities. 
+This example application creates 
+a generic user interface to invoke these services. The interface is based on [gform]. 
 
 
 ## Supported Technologies 
@@ -39,9 +36,13 @@ atem-rest provides CRUD rest services for spring beans. This way you the manager
 The atem-client gets can be notified of changes on watched beans via CometD push.
 
 
+## More
 
 
 
+
+[atem-rest]: https://github.com/stemey/atem-rest-service 
+[gform]: https://github.com/stemey/dojo-generate-form
 
 
 
