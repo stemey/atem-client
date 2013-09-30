@@ -37,8 +37,7 @@ The atem-client gets can be notified of changes on watched beans via CometD push
 
 
 ## More
-
-
+Ra more in the [wiki] (https://github.com/stemey/atem-client/wiki/Home)
 
 
 [atem-rest]: https://github.com/stemey/atem-rest-service 
