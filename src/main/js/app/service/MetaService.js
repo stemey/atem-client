@@ -47,6 +47,9 @@ define([ "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array" ],
 				},
 				getMeta : function(service) {
 					return this.meta.services[service];
+				},
+				getAllMeta : function() {
+					return this.meta;
 				}
 
 			});

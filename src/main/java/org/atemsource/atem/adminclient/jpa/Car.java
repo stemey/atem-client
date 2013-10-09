@@ -20,6 +20,15 @@ public class Car {
 	private int carId;
 	private double price;
 	private boolean powerSteering;
+	private String label;
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
 	private String color;
 	@OneToMany(targetEntity=Feature.class, cascade=CascadeType.ALL)
 	@Association(targetType=Feature.class,composition=true)

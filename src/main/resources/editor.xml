@@ -20,7 +20,7 @@
 
 
 	<!-- spring rest service -->
-	<bean class="org.atemsource.atem.service.meta.service.http.MetaRestService">
+	<bean id="metaRestService" class="org.atemsource.atem.service.meta.service.http.MetaRestService">
 		<property name="binder" ref="meta-binder" />
 		<property name="objectMapper">
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />
@@ -75,15 +75,9 @@
 					class="org.atemsource.atem.service.meta.service.binding.attributetype.BooleanMixin" />
 				<bean
 					class="org.atemsource.atem.service.meta.service.binding.attributetype.StringMixin" />
-<!-- 				<bean -->
-<!-- 					class="org.atemsource.atem.service.meta.service.binding.attributetype.JsonRefMixin" > -->
-<!-- 						<property name="entityTypeToUrlConverter"> -->
-<!-- 							<bean class="org.atemsource.atem.adminclient.RestEntityTypeToUrlConverter"> -->
-<!-- 								<property name="entityRestService" ref="entityRestService"> -->
-<!-- 								</property> -->
-<!-- 							</bean> -->
-<!-- 						</property> -->
-<!-- 					</bean> -->
+				<bean
+					class="org.atemsource.atem.service.meta.service.binding.attributetype.JsonRefMixin" >
+					</bean>
 			</set>
 		</property>
 		<property name="attributeMixins">

@@ -35,7 +35,7 @@ return declare( [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 		templateString : template,
 		postCreate : function() {	
 		},
-		loadData: function(resource) {
+		loadData: function(resource, storeRegistry, schemaRegistry) {
 			if (this.grid) {
 				this.grid.destroy();
 			}
@@ -70,7 +70,7 @@ return declare( [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 			this.gridContainer.addChild(this.grid);
 			this.grid.startup();
 			//this.borderContainer.layout();
-			this.editorController.loadData(resource);
+			this.editorController.loadData(resource, storeRegistry, schemaRegistry);
 			aspect.before(this.store,"remove",lang.hitch(this,"_onDelete"));
 			aspect.after(this.editorController,"_onUpdate",lang.hitch(this,"reload"));
 			aspect.after(this.editorController,"_onAdd",lang.hitch(this,"reload"));

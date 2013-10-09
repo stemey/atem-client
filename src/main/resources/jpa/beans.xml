@@ -24,7 +24,15 @@
 		<property name="services">
 			<set>
 				<ref bean="jpaCrudService"/>
+				<ref bean="jpaSearchService"/>
 			</set>
+		</property>
+	</bean>
+	
+		<bean id="jpaSearchService"
+		class="org.atemsource.atem.adminclient.JpaSingleTextSearchService" >
+		<property name="entityManager">
+			<ref bean="entityManager"/>
 		</property>
 	</bean>
 	
@@ -40,7 +48,14 @@
 		<property name="attributeConverters">
 			<list>
 				<bean class="org.atemsource.atem.utility.binding.AnnotationAttributeConverter"/>
-			</list>
+				<bean class="org.atemsource.atem.service.jsonref.AssociationAttributeConverter">
+								<property name="entityRestService" ref="entityRestService"/>
+								<property name="metaRestService" ref="metaRestService"/>
+								<property name="objectMapper">
+									<bean class="org.codehaus.jackson.map.ObjectMapper" />
+								</property>
+				</bean>
+		</list>
 		</property>
 	</bean>
 	

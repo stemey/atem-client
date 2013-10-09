@@ -10,7 +10,10 @@ define(
 				"dijit/_WidgetBase", "dijit/_TemplatedMixin",
 				"dijit/_WidgetsInTemplateMixin", //
 				"dojo/text!./service.html",//
-				"gform/EditorFactory"
+				"gform/EditorFactory",
+				"./resource/AtemStoreRegistry",
+				"./resource/AtemSchemaRegistry",
+
 
 		],
 		function(array, lang, declare, Stateful, metaService, restService,
@@ -19,7 +22,7 @@ define(
 				registry, //
 				FilteringSelect,//
 				Group,//
-				_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,EditorFactory) {
+				_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,EditorFactory, AtemStoreRegistry, AtemSchemaRegistry) {
 
 			return declare(
 					"app.ServiceController",
@@ -54,6 +57,8 @@ define(
 
 						},
 						metaLoaded : function(resp) {
+							this.storeRegistry= new AtemStoreRegistry(metaService.getAllMeta());
+							this.schemaRegistry= new AtemSchemaRegistry(metaService.getAllMeta());
 							var selectableServices = metaService.getServices();
 							var store = new ItemFileReadStore({
 								data : {
@@ -76,7 +81,7 @@ define(
 							if (meta) {
 								var controller=this[meta.type];
 								this.serviceStack.selectChild(controller);
-								controller.loadData(meta);
+								controller.loadData(meta, this.storeRegistry, this.schemaRegistry);
 							}
 
 						},

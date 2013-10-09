@@ -12,12 +12,15 @@ define([
 	"dijit/_WidgetsInTemplateMixin",
 	"dojo/text!./editor.html",
 	"dojo/store/JsonRest",
+	"gform/Context",
+	"gform/opener/SingleEditorDialogOpener",
+	"./urlToIdConverter",
 	"dijit/form/Button",
 	"dijit/layout/StackContainer",
 	"dijit/layout/ContentPane",
 	"dijit/ProgressBar",
 	"dijit/Dialog"
-], function(declare, lang, array, domClass, when, aspect, Editor, createEditorFactory, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, Store){
+], function(declare, lang, array, domClass, when, aspect, Editor, createEditorFactory, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, Store,Context, SingleEditorDialogOpener, urlToIdConverter){
 
 
 	
@@ -27,7 +30,17 @@ return declare("gform.tests.gridx.EditorController", [ _WidgetBase, _TemplatedMi
 		store: null,
 		state:"create",
 		postCreate: function() {
-			this.editor.set("editorFactory",createEditorFactory());
+			var editorFactory=createEditorFactory();
+			editorFactory.addConverterForType(urlToIdConverter, "ref");
+			this.editor.set("editorFactory",editorFactory);
+			var ctx = new Context();
+			var opener = new SingleEditorDialogOpener();
+			opener.storeRegistry = ctx.storeRegistry; 
+			opener.placeAt(this.opener);
+			opener.ctx=ctx;
+			ctx.opener = opener;
+			opener.startup();
+			this.editor.set("ctx",ctx);
 			this.editor.setMetaAndPlainValue({attributes:[]}, {});
 			
 			var dialog=this.dialog;
@@ -39,7 +52,10 @@ return declare("gform.tests.gridx.EditorController", [ _WidgetBase, _TemplatedMi
 			});
 			this.dialogNoButton.on("click",function() {dialog.hide();});
 		},
-		loadData : function(resource) {	
+		loadData : function(resource, storeRegistry, schemaRegistry) {	
+			this.editor.ctx.storeRegistry=storeRegistry;
+			this.editor.ctx.schemaRegistry=schemaRegistry;
+			window.globalStoreRegistry=storeRegistry;
 			this.resource=resource;
 			this.editor.setMetaAndPlainValue(resource.resourceType, {});
 			this.store= new Store({target: resource.uriPath, idProperty: resource.idProperty});
