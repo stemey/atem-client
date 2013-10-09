@@ -20,17 +20,18 @@ define([
 	"dijit/_WidgetBase", 
 	"dijit/_TemplatedMixin",
 	"dijit/_WidgetsInTemplateMixin",
+	"gform/layout/_InvisibleMixin",
 	"dojo/text!./grid.html",
 	"dijit/layout/BorderContainer",
 	"dijit/layout/ContentPane",
 	"dijit/Toolbar"
 ], function(declare, lang, aspect, gform2TableStructure, Grid, Cache, 
 	VirtualVScroller, ColumnResizer, SingleSort, Filter, FilterBar, Query, Focus, RowHeader, RowSelect, 
-	 Store, json, EditorController, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template){
+	 Store, json, EditorController, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _InvisibleMixin, template){
 
 
 	
-return declare( [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+return declare( [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,_InvisibleMixin], {
 		baseClass : "gformGridController",
 		templateString : template,
 		postCreate : function() {	
@@ -75,8 +76,8 @@ return declare( [ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 			aspect.after(this.editorController,"_onUpdate",lang.hitch(this,"reload"));
 			aspect.after(this.editorController,"_onAdd",lang.hitch(this,"reload"));
 			aspect.after(this.editorController,"_onRemoved",lang.hitch(this,"reload"));
-			this.borderContainer.resize({w:500,h:500});
-			//this.borderContainer.resize();
+			//this.borderContainer.resize({w:500,h:500});
+			this.borderContainer.resize();
 		},
 		reload:function() {
 			this.grid.model.clearCache();

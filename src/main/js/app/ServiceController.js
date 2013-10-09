@@ -11,6 +11,7 @@ define(
 				"dijit/_WidgetsInTemplateMixin", //
 				"dojo/text!./service.html",//
 				"gform/EditorFactory",
+				"gform/layout/_InvisibleMixin",
 				"./resource/AtemStoreRegistry",
 				"./resource/AtemSchemaRegistry",
 
@@ -22,12 +23,13 @@ define(
 				registry, //
 				FilteringSelect,//
 				Group,//
-				_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,EditorFactory, AtemStoreRegistry, AtemSchemaRegistry) {
+				_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,EditorFactory, _InvisibleMixin, AtemStoreRegistry, AtemSchemaRegistry) {
 
 			return declare(
 					"app.ServiceController",
-					[ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin ],
+					[ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _InvisibleMixin ],
 					{
+						isLayoutContainer:true,		
 						_relTargetProp : "target",
 						templateString : template,
 						editor : null,

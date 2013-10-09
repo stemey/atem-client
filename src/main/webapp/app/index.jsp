@@ -77,7 +77,7 @@
 
 </head>
 
-<body class="claro">
+<body class="claro" style="width: 100%; height: 100%">
 
 	<div id="mainContent" style="height: 100%">
 		<div id="appContainer" data-dojo-type="dijit.layout.BorderContainer"

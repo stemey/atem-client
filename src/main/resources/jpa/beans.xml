@@ -24,15 +24,7 @@
 		<property name="services">
 			<set>
 				<ref bean="jpaCrudService"/>
-				<ref bean="jpaSearchService"/>
 			</set>
-		</property>
-	</bean>
-	
-		<bean id="jpaSearchService"
-		class="org.atemsource.atem.adminclient.JpaSingleTextSearchService" >
-		<property name="entityManager">
-			<ref bean="entityManager"/>
 		</property>
 	</bean>
 	
