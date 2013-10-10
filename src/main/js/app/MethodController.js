@@ -1,9 +1,10 @@
-define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./SingletonWidget", "dojo/Stateful",
+define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "dojo/Stateful",
 		"app/service/MetaService", "app/service/RestService", 'dojo/data/ItemFileReadStore', 'app/lib/beautify',
 		'gform/model/getPlainValue', 'gform/createStandardEditorFactory',//
 		"dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dojo/text!./method.html", "dojo/query",//
-		 "dojox/highlight", "dojox/highlight/languages/javascript", "dojox/highlight/widget/Code", "dojox/mvc/Output", "dojox/mvc/Group"
-], function(array, lang, declare, SingletonWidget, Stateful, metaService, restService, ItemFileReadStore, beautify,
+		 "dojox/highlight", 
+		 "dojox/highlight/languages/javascript", "dojox/highlight/widget/Code", "dojox/mvc/Output", "dojox/mvc/Group"
+], function(array, lang, declare, Stateful, metaService, restService, ItemFileReadStore, beautify,
 		getPlainValue, createStandardEditorFactory,//
 		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, query, highlight) {
 

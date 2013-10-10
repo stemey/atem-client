@@ -2,7 +2,7 @@ define(
 		[ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare",
 				"dojo/Stateful", "app/service/MetaService",
 				"app/service/RestService", 'dojo/data/ItemFileReadStore',
-				'app/lib/beautify', './SingletonController','./ObservationController','./MethodController',
+				'app/lib/beautify','./ObservationController','./MethodController',
 				'./resource/GridController',//
 				"dijit/registry",//
 				"dijit/form/FilteringSelect",//
@@ -14,16 +14,20 @@ define(
 				"gform/layout/_InvisibleMixin",
 				"./resource/AtemStoreRegistry",
 				"./resource/AtemSchemaRegistry",
-
+				"dojo/on",
+				"dijit/MenuBar",
+				"dijit/PopupMenuBarItem",	
+				"dijit/DropDownMenu",
+				"dijit/MenuItem",
 
 		],
 		function(array, lang, declare, Stateful, metaService, restService,
-				ItemFileReadStore, beautify, SingletonController,ObservationController,MethodController,
+				ItemFileReadStore, beautify, ObservationController,MethodController,
 				GridController,//
 				registry, //
 				FilteringSelect,//
 				Group,//
-				_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,EditorFactory, _InvisibleMixin, AtemStoreRegistry, AtemSchemaRegistry) {
+				_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,EditorFactory, _InvisibleMixin, AtemStoreRegistry, AtemSchemaRegistry, on) {
 
 			return declare(
 					"app.ServiceController",
@@ -56,7 +60,19 @@ define(
 									"metaLoaded"));
 							this.target.watch("selectedService", lang.hitch(
 									this, "onServiceSelected"));
+							
 
+						},
+						startup: function() {
+							this.inherited(arguments);
+							array.forEach(this.menuBar.getChildren(), function(menuItem){
+								array.forEach(menuItem.popup.getChildren(), function(navItem){
+									navItem.onClick = lang.hitch(this, "onNavClicked", navItem);
+								}, this)	
+							}, this)
+						},
+						onNavClicked: function(navItem) {
+							this.selectService(navItem.service);
 						},
 						metaLoaded : function(resp) {
 							this.storeRegistry= new AtemStoreRegistry(metaService.getAllMeta());
@@ -92,7 +108,43 @@ define(
 						},
 						onMetaChanged : function() {
 							// clear response
-						}
+						},
+						selectService: function(service) {
+							var meta = metaService.getMeta(service);
+							if (meta) {
+								this.target.set("selectedService", service);
+							} else {
+								var serviceId = "org.atemsource.atem.adminclient."+service;
+								this.target.set("selectedService", serviceId);
+							}
+						},
+						selectShortService: function(name) {
+							this.target.set("selectedService", name);
+						},
+						findCars:function() {
+							this.selectShortService("findCar");
+						},
+						createCar:function() {
+							this.selectShortService("addCar");
+						},
+						updateCar:function() {
+							this.selectShortService("updateCar");
+						},
+						deleteCar:function() {
+							this.selectShortService("deleteCar");
+						},
+						showCategory:function() {
+							this.selectService("jpa.Category");
+						},
+						showCar:function() {
+							this.selectService("jpa.Car");
+						},
+						showExample1:function() {
+							this.selectService("jpa.Car");
+						},
+						showExample2:function() {
+							this.selectService("jpa.Car");
+						},
 					});
 
 		});

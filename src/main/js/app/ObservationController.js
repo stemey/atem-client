@@ -1,11 +1,12 @@
-define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "./SingletonWidget", "dojo/Stateful",
+define([ "dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "dojo/Stateful",
 		"app/service/MetaService", "app/service/RestService", 'dojo/data/ItemFileReadStore', 'app/lib/beautify',
 		'gform/model/getPlainValue', 'gform/createStandardEditorFactory',//
 		"dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin",
-		"dojo/text!./observation.html","app/service/ObservationService"//
-		], function(array, lang, declare, SingletonWidget, Stateful,
+		"dojo/text!./observation.html","app/service/ObservationService",//
+		"gform/layout/_InvisibleMixin",
+		], function(array, lang, declare, Stateful,
 		metaService, restService, ItemFileReadStore, beautify, getPlainValue, createStandardEditorFactory,//
-		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,observationService
+		_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,observationService, _InvisibleMixin
 		) {
 	/**
 	 * select service select id fromselctor (prefilled by getEntities)

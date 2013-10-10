@@ -21,9 +21,6 @@
 	</context:component-scan>
 
 	<!-- Custom beans -->
-	<bean id="simpleThing" class="org.atemsource.atem.adminclient.springbean.ExampleThing">
-		<property name="yes" value="true" />
-	</bean>
 
 	<bean id="configuredBean" class="org.atemsource.atem.adminclient.springbean.ExampleBean">
 		<property name="number" value="123" />
