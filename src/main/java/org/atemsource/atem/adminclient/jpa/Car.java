@@ -3,24 +3,47 @@ package org.atemsource.atem.adminclient.jpa;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 import org.atemsource.atem.api.attribute.annotation.Association;
 
 @Entity
+/**
+ * A car (e.g. sportscar, truck)
+ * @author eee
+ *
+ */
 public class Car {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int carId;
+	private Integer carId;
+	/**
+	 * the price of the car.
+	 */
 	private double price;
+	/**
+	 * powersteering makes it easy to drive.
+	 */
 	private boolean powerSteering;
+	/**
+	 * the name of the car.
+	 */
 	private String label;
+
+	/**
+	 * the color of the car (e.g. black)
+	 */
+	private String color;
+	@OneToMany(targetEntity = Feature.class, cascade = CascadeType.ALL)
+	/**
+	 * a list of features.
+	 */
+	private List<Feature> features;
+
 	public String getLabel() {
 		return label;
 	}
@@ -29,16 +52,11 @@ public class Car {
 		this.label = label;
 	}
 
-	private String color;
-	@OneToMany(targetEntity=Feature.class, cascade=CascadeType.ALL)
-	@Association(targetType=Feature.class,composition=true)
-	private List<Feature> features;
-
-	public int getCarId() {
+	public Integer getCarId() {
 		return carId;
 	}
 
-	public void setCarId(int carId) {
+	public void setCarId(Integer carId) {
 		this.carId = carId;
 	}
 

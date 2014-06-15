@@ -15,22 +15,33 @@ import org.atemsource.atem.api.attribute.annotation.Association;
 import org.atemsource.atem.utility.transform.api.annotation.Conversion;
 
 @Entity
+/**
+ * A category of cars(e.g. truck)
+ * @author eee
+ *
+ */
 public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int categoryId;
-	public int getCategoryId() {
+	private Integer categoryId;
+
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
+	/**
+	 * name of the category
+	 */
 	private String label;
-	@OneToMany(targetEntity=Car.class)
-	@Association(targetType=Car.class,composition=false)
+	@OneToMany(targetEntity = Car.class)
+	/**
+	 * members of the category.
+	 */
 	private List<Car> cars;
 
 	public String getLabel() {

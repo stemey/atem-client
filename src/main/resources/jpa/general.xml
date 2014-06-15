@@ -68,12 +68,13 @@
 
 	<bean id="jpa-json-repository" class="org.atemsource.atem.impl.json.JsonEntityTypeRepository">
 		<property name="typeProperty" value="ext_type"/>
-<!-- 		<property name="services"> -->
-<!-- 			<list> -->
-<!-- 				<bean class="org.atemsource.atem.service.meta.type.DerivedBaseService"/> -->
-<!-- 				<bean class="org.atemsource.atem.service.meta.type.DerivedStatelessForStatefulService"/> -->
-<!-- 			</list> -->
-<!-- 		</property> -->
+		<property name="services">
+			<list>
+				<bean class="org.atemsource.atem.utility.validation.AtemTypeAndConstraintValidationService">
+					<property name="attributePathBuilderFactory" ref="atem-utility-attributePathBuilderFactory"/>
+				</bean>
+			</list>
+		</property>
 		<property name="objectMapper">
 			<bean class="org.codehaus.jackson.map.ObjectMapper" />
 		</property>

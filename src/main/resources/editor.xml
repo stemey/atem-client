@@ -98,6 +98,7 @@
 					class="org.atemsource.atem.service.meta.service.binding.springrest.RequestParamMixin" />
 				<bean
 					class="org.atemsource.atem.service.meta.service.binding.javadoc.JavadocMixin" />
+					<!--  may override required -->
 				<bean
 					class="org.atemsource.atem.service.identity.IdAttributeMixin" />
 			</list>

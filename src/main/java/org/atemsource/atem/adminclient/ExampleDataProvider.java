@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 
 import org.atemsource.atem.adminclient.jpa.Car;
 import org.atemsource.atem.adminclient.jpa.Category;
-import org.atemsource.atem.adminclient.jpa.ExampleBean;
 import org.atemsource.atem.api.infrastructure.exception.TechnicalException;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -38,18 +37,6 @@ public class ExampleDataProvider
 		try
 		{
 
-			ExampleBean exampleBean = new ExampleBean();
-			exampleBean.setText("my text");
-			entityManager.persist(exampleBean);
-			ExampleBean exampleBean2 = new ExampleBean();
-			exampleBean2.setText("my text2");
-			entityManager.persist(exampleBean2);
-			ExampleBean exampleBean3 = new ExampleBean();
-			exampleBean3.setText("my text3");
-			entityManager.persist(exampleBean3);
-			ExampleBean exampleBean4 = new ExampleBean();
-			exampleBean4.setText("my text4");
-			entityManager.persist(exampleBean4);
 			Car car = new Car();
 			car.setPrice(123.3D);
 			car.setLabel("Audi");
