@@ -2,5 +2,7 @@
 
 	<persistence-unit name="example" transaction-type="RESOURCE_LOCAL">
 	</persistence-unit>
+	<persistence-unit name="tag" transaction-type="RESOURCE_LOCAL">
+	</persistence-unit>
 
 </persistence>
